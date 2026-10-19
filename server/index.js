@@ -664,8 +664,8 @@ const ADMIN_CSP = "default-src 'self'; img-src 'self' data: blob:; media-src 'se
 
 /* Tên miền đang được truy cập (dùng cho sitemap khi chưa khai báo địa chỉ website trong trang quản trị) */
 const originOf = req => `${req.headers["x-forwarded-proto"] === "https" || req.socket.encrypted ? "https" : "http"}://${req.headers.host}`;
-/* Bản xem thử qua đường link tạm (Cloudflare Tunnel, ngrok...): không cho Google lập chỉ mục */
-const isTempHost = req => /\.(trycloudflare\.com|ngrok-free\.app|ngrok\.io|ngrok\.app|loca\.lt)$/i.test(String(req.headers.host || "").replace(/:\d+$/, ""));
+/* Đường link tạm (tunnel) hoặc truy cập thẳng bằng IP: không cho Google lập chỉ mục */
+const isTempHost = req => { const h = String(req.headers.host || "").replace(/:\d+$/, ""); return /\.(trycloudflare\.com|ngrok-free\.app|ngrok\.io|ngrok\.app|loca\.lt)$/i.test(h) || /^\d{1,3}(\.\d{1,3}){3}$/.test(h); };
 async function serveStatic(req, res, url) {
   if (isTempHost(req)) res.setHeader("X-Robots-Tag", "noindex, nofollow");
   if (url.pathname === "/admin") { res.writeHead(301, { Location: "/admin/" }); return res.end(); }
