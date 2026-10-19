@@ -926,3 +926,12 @@ h1, h2, h3, .process-num, .stat-card b, .price-row b, .pd-price b { font-variant
 @media (prefers-reduced-motion: reduce) {
   .nav > li { transform: none; transition: opacity .2s linear; }
 }
+
+/* Video banner chỉ là hình nền: không nhận chạm, để trình duyệt điện thoại không bật trình phát / menu video khi lướt qua */
+.hero-video, .hero-photo--video { pointer-events: none; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; }
+.hero-video::-webkit-media-controls, .hero-video::-webkit-media-controls-start-playback-button, .hero-video::-webkit-media-controls-overlay-play-button { display: none !important; -webkit-appearance: none; }
+
+/* iPhone tự phóng to trang khi chạm vào ô nhập có chữ nhỏ hơn 16px: trên màn cảm ứng giữ chữ ô nhập tối thiểu 16px */
+@media (pointer: coarse) {
+  input:not([type=checkbox]):not([type=radio]):not([type=range]), select, textarea { font-size: 16px !important; }
+}

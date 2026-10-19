@@ -3,4 +3,4 @@
    luôn được ưu tiên, không cần tăng độ ưu tiên selector hay dùng !important. */
 @import url("style.css?v=30") layer(legacy-base);
 @import url("layout.css?v=30") layer(legacy);
-@import url("luxe.css?v=54");
+@import url("luxe.css?v=55");

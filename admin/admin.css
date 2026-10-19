@@ -733,3 +733,8 @@ input[type=text], input[type=search], input[type=email], input[type=tel], input[
 .side-scrim { display: none; position: fixed; inset: 0; z-index: 55; background: rgba(43, 36, 30, .32); -webkit-tap-highlight-color: transparent; animation: scrim-in .25s var(--ease) both; }
 @keyframes scrim-in { from { opacity: 0; } }
 @media (min-width: 981px) { .shell.nav-open .side-scrim { display: none; } }
+
+/* iPhone tự phóng to khi chạm vào ô nhập chữ nhỏ hơn 16px: trên màn cảm ứng giữ chữ ô nhập tối thiểu 16px */
+@media (pointer: coarse) {
+  input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=color]), select, textarea { font-size: 16px !important; }
+}

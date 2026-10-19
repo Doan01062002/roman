@@ -295,7 +295,7 @@ function initHome() {
   /* Hero (hd08-hero-kv-home) */
   const slides = HERO_SLIDES.map((s, i) => `<div class="hero-slide${s.photo ? " has-photo" : ""}${s.dark ? " is-dark" : ""}" style="background:${esc(s.bg)};--banner-bg:${esc(s.bg)}${s.photo ? `;--hero-img:url('${new URL(s.video ? videoAsset(s.video + "-poster-sm.jpg") : ph(s.photo, "sm"), document.baseURI).href}')` : ""}">${s.photo
       ? (s.video
-        ? `<div class="hero-photo hero-photo--video" role="img" aria-label="${esc(s.alt || "")}"><video class="hero-video" data-src="${esc(s.video)}" muted playsinline preload="${i ? "none" : "metadata"}" poster="${videoAsset(s.video + "-poster.jpg")}" aria-hidden="true" tabindex="-1" disablepictureinpicture disableremoteplayback></video></div>`
+        ? `<div class="hero-photo hero-photo--video" role="img" aria-label="${esc(s.alt || "")}"><video class="hero-video" data-src="${esc(s.video)}" muted playsinline webkit-playsinline x5-playsinline x5-video-player-type="h5-page" controlslist="nofullscreen nodownload noremoteplayback" preload="${i ? "none" : "metadata"}" poster="${videoAsset(s.video + "-poster.jpg")}" aria-hidden="true" tabindex="-1" disablepictureinpicture disableremoteplayback></video></div>`
         : `<div class="hero-photo"><img src="${ph(s.photo, "lg")}" alt="${esc(s.alt || "")}" ${i ? 'loading="lazy"' : 'fetchpriority="high"'}></div>`)
       : ribbon(s.hue)}
     <div class="hero-inner">
@@ -323,12 +323,18 @@ function initHome() {
   const dotEls = $$("#dots button");
   const small = matchMedia("(max-width: 900px)");
   const saveData = !!(navigator.connection && navigator.connection.saveData);
+  /* Một số trình duyệt trong ứng dụng (Zalo, Facebook, Messenger...) không cho phát video ngay trong trang:
+     hễ gọi play() là bật trình phát toàn màn hình, nên mỗi lần cuộn qua banner video lại tự mở lên.
+     Gặp trường hợp đó: thoát toàn màn hình, tắt video (chỉ giữ ảnh tĩnh) cho cả phiên truy cập. */
+  let inlineBlocked = false;
+  try { inlineBlocked = sessionStorage.getItem("roman-no-inline-video") === "1"; } catch (e) {}
+  const noVid = () => saveData || inlineBlocked;
   const videos = slideEls.map(sl => sl.querySelector("video"));
   const FALLBACK_MS = 5500;
 
   /* Nạp nguồn video theo kích thước màn hình; chỉ nạp khi cần (slide đầu ngay, slide sau khi sắp tới lượt) */
   const loadVideo = v => {
-    if (!v || v.dataset.ready || saveData) return;
+    if (!v || v.dataset.ready || noVid()) return;
     v.dataset.ready = "1";
     v.src = videoAsset(v.dataset.src + (small.matches ? "-sm" : "") + ".mp4");
     v.preload = "auto";
@@ -338,11 +344,26 @@ function initHome() {
   const shouldPlay = () => !paused && !hold && !offscreen && !document.hidden;
   const playActive = () => {
     const v = videos[idx];
-    if (!v || !shouldPlay()) return;
+    if (!v || noVid() || !shouldPlay()) return;
     const p = v.play();
     if (p && p.catch) p.catch(() => scheduleFallback());
   };
   const pauseAll = () => videos.forEach(v => v && v.pause());
+  function blockInline() {
+    if (inlineBlocked) return;
+    inlineBlocked = true;
+    try { sessionStorage.setItem("roman-no-inline-video", "1"); } catch (e) {}
+    videos.forEach(v => {
+      if (!v) return;
+      try { if (v.webkitDisplayingFullscreen && v.webkitExitFullscreen) v.webkitExitFullscreen(); } catch (e) {}
+      try { if (document.pictureInPictureElement === v) document.exitPictureInPicture(); } catch (e) {}
+      v.pause();
+      v.classList.remove("is-playing");
+    });
+    const fs = document.fullscreenElement || document.webkitFullscreenElement;
+    if (fs) { try { (document.exitFullscreen || document.webkitExitFullscreen).call(document); } catch (e) {} }
+    scheduleFallback();
+  }
   const next = () => go(idx + 1);
 
   /* Hẹn giờ chuyển slide: slide có video chuyển khi video chạy hết; slide không có video chuyển sau 5,5 giây */
@@ -350,7 +371,7 @@ function initHome() {
     clearTimeout(timer);
     if (!shouldPlay()) return;
     const v = videos[idx];
-    const live = v && !saveData && v.readyState >= 2 && !v.paused;
+    const live = v && !noVid() && v.readyState >= 2 && !v.paused;
     if (live) return; // sự kiện "ended" sẽ chuyển slide
     timer = setTimeout(next, FALLBACK_MS);
   };
@@ -361,7 +382,14 @@ function initHome() {
     v.addEventListener("ended", () => { if (i === idx) next(); });
     v.addEventListener("error", () => { if (i === idx) scheduleFallback(); });
     v.addEventListener("playing", () => v.classList.add("is-playing"));
+    v.addEventListener("webkitbeginfullscreen", blockInline);
+    v.addEventListener("enterpictureinpicture", blockInline);
+    v.addEventListener("webkitpresentationmodechanged", () => { if (v.webkitPresentationMode && v.webkitPresentationMode !== "inline") blockInline(); });
   });
+  ["fullscreenchange", "webkitfullscreenchange"].forEach(t => document.addEventListener(t, () => {
+    const el = document.fullscreenElement || document.webkitFullscreenElement;
+    if (el && (el.tagName === "VIDEO" || el.querySelector?.(".hero-video"))) blockInline();
+  }));
 
   const go = n => {
     const prev = idx;
@@ -376,10 +404,10 @@ function initHome() {
     if (v) { loadVideo(v); try { v.currentTime = 0; } catch (e) {} setProgress(idx, 0); }
     loadVideo(videos[(idx + 1) % videos.length]);
     clearTimeout(timer);
-    if (v && !saveData) { playActive(); timer = setTimeout(() => { if (shouldPlay() && v.paused) scheduleFallback(); }, 2500); }
+    if (v && !noVid()) { playActive(); timer = setTimeout(() => { if (shouldPlay() && v.paused) scheduleFallback(); }, 2500); }
     else scheduleFallback();
   };
-  const auto = () => { clearTimeout(timer); if (!shouldPlay()) { pauseAll(); return; } videos[idx] && !saveData ? playActive() : null; scheduleFallback(); };
+  const auto = () => { clearTimeout(timer); if (!shouldPlay()) { pauseAll(); return; } videos[idx] && !noVid() ? playActive() : null; scheduleFallback(); };
 
   hero.addEventListener("focusin", () => { hold = true; auto(); });
   hero.addEventListener("focusout", e => { if (!hero.contains(e.relatedTarget)) { hold = false; auto(); } });
