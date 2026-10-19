@@ -858,3 +858,9 @@ h1, h2, h3, .process-num, .stat-card b, .price-row b, .pd-price b { font-variant
 }
 .foot-cta .btn-outline:hover, .foot-cta .btn-outline:focus-visible { color: var(--lx-gold-ink); animation: m-underline .7s var(--m-ease, ease); }
 @media (max-width: 680px) { .foot-cta .btn-outline, .foot-cta .btn-outline:hover { padding: 14px 0 7px; } }
+
+/* ===== Slide đầu trang phủ kín màn hình điện thoại / máy tính bảng =====
+   svh = chiều cao thật khi thanh địa chỉ trình duyệt đang hiện, nên không bị hụt hay tràn. vh là dự phòng cho trình duyệt cũ. */
+@media (max-width: 1100px) {
+  .hero-slide, .hero-slide.has-photo { min-height: 100vh; min-height: 100svh; }
+}
