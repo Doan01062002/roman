@@ -765,6 +765,8 @@ function initReveal() {
 
   let ticking = false;
   const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(frame); } };
+  /* Hàng thẻ vuốt ngang: nếu bị lệch dọc (bấm Tab, cuộn tới phần tử...) thì đưa về ngay */
+  $$(".fcards").forEach(row => row.addEventListener("scroll", () => { if (row.scrollTop) row.scrollTop = 0; }, { passive: true }));
 
   const bar = document.createElement("div");
   bar.className = "m-progress";

@@ -864,3 +864,9 @@ h1, h2, h3, .process-num, .stat-card b, .price-row b, .pd-price b { font-variant
 @media (max-width: 1100px) {
   .hero-slide, .hero-slide.has-photo { min-height: 100vh; min-height: 100svh; }
 }
+
+/* ===== Hàng thẻ dưới banner khi là băng chuyền vuốt ngang (điện thoại, máy tính bảng): chỉ cuộn ngang ===== */
+@media (max-width: 1100px) {
+  .fcards { overflow-y: hidden; overscroll-behavior-x: contain; touch-action: pan-x pan-y; }
+  .js-motion .fcards > [data-m="up"]:not(.m-in) { transform: translateX(56px); }
+}
