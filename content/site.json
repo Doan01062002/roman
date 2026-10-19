@@ -1,6 +1,6 @@
 {
-  "rev": 10,
-  "updatedAt": "2026-10-19T07:38:22.179Z",
+  "rev": 11,
+  "updatedAt": "2026-10-19T08:56:10.535Z",
   "site": {
     "name": "ROMAN",
     "tagline": "Xưởng Chế Tác & Cá Nhân Hóa Nội Thất Ô Tô Cao Cấp",
@@ -1482,12 +1482,12 @@
       ]
     },
     {
-      "eyebrow": "TRẦN DA LỘN",
-      "title": "Trần Da Lộn",
-      "sub": "Bọc trần da lộn mềm mịn, đồng bộ khoang nội thất.",
+      "eyebrow": "TRẦN SAO RƠI",
+      "title": "Trần Sao Rơi",
+      "sub": "Hàng trăm điểm sáng sợi quang trên nền da lộn, may đo theo từng dòng xe.",
       "cta": "Khám phá",
-      "link": "product.html?id=tran-da-lon",
-      "book": "tran-da-lon",
+      "link": "product.html?id=tran-sao",
+      "book": "tran-sao",
       "photo": "tran-02",
       "alt": "Trần sao rơi Starlight sợi quang trên nền da lộn Alcantara",
       "side": "left",
