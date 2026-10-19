@@ -136,6 +136,7 @@ function renderHeader() {
     navEl.classList.toggle("open", open);
     menuBtn.setAttribute("aria-expanded", String(open));
     document.body.classList.toggle("menu-open", open);
+    if (open) header.classList.remove("hide");
     syncSolid();
   };
   menuBtn.onclick = () => setMenu(!navEl.classList.contains("open"));

@@ -425,6 +425,8 @@ const STAFF_VIEWS = new Set(["bookings", "calendar", "customers", "stats", "acco
 const ROLE_LABEL = { owner: "Quản trị viên", staff: "Nhân viên" };
 const canSee = id => S.role === "owner" || STAFF_VIEWS.has(id);
 const homeView = () => (S.role === "owner" ? "dashboard" : "bookings");
+/* Menu trượt trên điện thoại: chạm ra ngoài hoặc bấm Esc để đóng */
+const closeSideNav = () => $("#shell")?.classList.remove("nav-open");
 function renderShell() {
   const owner = S.role === "owner";
   const saveBtn = owner && h("button", { class: "btn btn-dark", id: "saveBtn", type: "button", onclick: save, title: "Lưu thay đổi (Ctrl + S)", html: ICON.save }, "Lưu thay đổi", h("kbd", null, "Ctrl S"));
@@ -443,7 +445,8 @@ function renderShell() {
         h("div", { class: "top-title" }, h("span", { class: "crumb", id: "viewCrumb" }), h("h1", { id: "viewTitle" })), state,
         h("button", { type: "button", class: "qs-btn", onclick: quickSearch, "aria-label": "Tìm nhanh (Ctrl + K)", html: ICON.search }, h("span", null, "Tìm nhanh…"), h("kbd", null, "Ctrl K")),
         h("a", { class: "btn btn-view", href: "../index.html", target: "_blank", rel: "noopener", html: ICON.ext }, "Xem website"), saveBtn),
-      h("main", { class: "view", id: "view" })));
+      h("main", { class: "view", id: "view" })),
+    h("div", { class: "side-scrim", "aria-hidden": "true", onclick: closeSideNav }));
   put($("#app"), shell);
   shell.querySelector(".side").addEventListener("click", e => { if (e.target.closest("a")) shell.classList.remove("nav-open"); });
   markDirty = () => { S.dirty = true; updateSaveState(); };
@@ -1340,6 +1343,7 @@ setInterval(async () => {
 }, 60000);
 window.addEventListener("beforeunload", e => { if (S.dirty) { e.preventDefault(); e.returnValue = ""; } });
 window.addEventListener("keydown", e => {
+  if (e.key === "Escape" && $("#shell")?.classList.contains("nav-open")) { closeSideNav(); return; }
   if (!S.c || !(e.ctrlKey || e.metaKey)) return;
   const k = e.key.toLowerCase();
   if (k === "s") { e.preventDefault(); if (S.role === "owner") save(); }
