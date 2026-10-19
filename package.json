@@ -1,0 +1,13 @@
+{
+  "name": "roman-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Website ROMAN và trang quản trị nội dung",
+  "scripts": {
+    "start": "node server/index.js",
+    "migrate": "node server/migrate.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

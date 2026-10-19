@@ -1,0 +1,6 @@
+/* Điểm vào CSS của website.
+   CSS cũ (style.css, layout.css) được đặt trong "cascade layer" nên giao diện sang trọng luxe.css (không thuộc layer nào)
+   luôn được ưu tiên, không cần tăng độ ưu tiên selector hay dùng !important. */
+@import url("style.css?v=30") layer(legacy-base);
+@import url("layout.css?v=30") layer(legacy);
+@import url("luxe.css?v=50");

@@ -1,0 +1,7 @@
+# Xuống dòng kiểu Linux (chạy trên VPS); tệp .cmd của Windows giữ CRLF
+* text=auto eol=lf
+*.cmd text eol=crlf
+*.jpg binary
+*.png binary
+*.mp4 binary
+*.webp binary

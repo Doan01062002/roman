@@ -1,0 +1,17 @@
+# Dữ liệu riêng trên máy chủ: KHÔNG đưa lên Git
+# (mật khẩu quản trị, mã bot Telegram, lịch hẹn có số điện thoại khách, nhật ký, thống kê, bản sao lưu)
+content/*
+!content/site.json
+content/backups/
+
+# Tệp tạm
+*.tmp
+*.log
+node_modules/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Cài đặt cá nhân của công cụ
+.claude/settings.local.json
+.vscode/
