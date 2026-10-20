@@ -428,6 +428,9 @@ function initHome() {
     hero.classList.add("hero-entered");
   }
 
+  /* Tìm sản phẩm theo xe + tư vấn chọn sàn/thảm (js/finder.js) */
+  if (typeof initFinder === "function") initFinder();
+
   /* Chiếm trước ảnh của các banner lớn để thẻ và mục khác không lấy trùng */
   FEATURES.forEach(f => claimPhoto(f.photo));
   if (typeof LIMOUSINE !== "undefined") claimPhoto(LIMOUSINE.photo);
@@ -989,6 +992,9 @@ function initSupport() {
     const details = [dv.name, mau ? `Màu: ${mau}` : "", opt ? `Cấu hình: ${opt}` : ""].filter(Boolean).join(" · ");
     $("#contactForm [name=msg]").value = `Tôi muốn đặt lịch tư vấn & thi công: ${details}`;
   }
+  /* Đến từ khối "Tìm sản phẩm cho xe của bạn": điền sẵn xe */
+  const xe = param("xe");
+  if (xe) $("#contactForm [name=car]").value = xe.slice(0, 80);
   $("#contactForm").addEventListener("submit", async e => {
     e.preventDefault();
     const f = e.target, d = Object.fromEntries(new FormData(f)), out = $("#sent");
