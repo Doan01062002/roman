@@ -73,6 +73,7 @@ function buildDataJs(c) {
     ["SITE", site], ["CATEGORIES", c.categories], ["PRODUCTS", products], ["HERO_SLIDES", c.hero],
     ["FEATURES", c.features], ["STORIES", c.stories], ["LIMOUSINE", c.limousine], ["NOTES", c.notes],
     ["SOCIAL", c.social], ["PHOTO_ALT", c.photoAlt], ["MATERIALS", c.materials], ["PAGES", c.pages],
+    ["CARS", c.cars || { quick: [], brands: [] }],
   ];
   return `/* TỆP TỰ SINH từ content/site.json bởi trang quản trị (/admin). Đừng sửa tay: mọi thay đổi sẽ bị ghi đè khi lưu.
    Phiên bản nội dung: ${c.rev || 0} */\n` + parts.map(([k, v]) => `const ${k} = ${J(v)};`).join("\n") + "\n";
@@ -94,6 +95,38 @@ function patchHtml(html, seo, rev) {
   }
   s = s.replace(/js\/data\.js\?v=[^"]*/, `js/data.js?v=d${rev}`);
   return s;
+}
+
+/* Danh sách xe cho khối "Tìm sản phẩm cho xe của bạn" (trang chủ) */
+const CAR_TYPES = ["sedan", "hatch", "suv5", "suv7", "mpv", "pickup", "van16"];
+function validateCars(cars, err) {
+  if (!Array.isArray(cars.brands) || !Array.isArray(cars.quick || [])) return err.push("Danh sách xe không đúng định dạng");
+  if (cars.brands.length > 60) err.push("Danh sách xe: tối đa 60 hãng");
+  const seenB = new Set();
+  cars.brands.forEach((b, i) => {
+    const bn = String(b.name || "").trim();
+    if (!bn) return err.push(`Danh sách xe: hãng #${i + 1} chưa có tên`);
+    if (seenB.has(bn.toLowerCase())) err.push(`Danh sách xe: hãng "${bn}" bị trùng`);
+    seenB.add(bn.toLowerCase());
+    if (!Array.isArray(b.models) || b.models.length > 150) return err.push(`Danh sách xe: hãng "${bn}" tối đa 150 dòng xe`);
+    const seenM = new Set();
+    b.models.forEach((m, j) => {
+      const mn = String(m.name || "").trim(), at = `Danh sách xe: ${bn} ${mn || `dòng #${j + 1}`}`;
+      if (!mn) return err.push(`${at}: chưa có tên dòng xe`);
+      if (mn.length > 60) err.push(`${at}: tên quá dài`);
+      if (seenM.has(mn.toLowerCase())) err.push(`${at}: bị trùng tên`);
+      seenM.add(mn.toLowerCase());
+      if (!CAR_TYPES.includes(m.type)) err.push(`${at}: chưa chọn loại xe`);
+      const from = Number(m.from), to = m.to === null || m.to === "" || m.to === undefined ? null : Number(m.to);
+      if (!Number.isInteger(from) || from < 1950 || from > 2100) err.push(`${at}: năm bắt đầu bán phải là năm hợp lệ (VD: 2022)`);
+      if (to !== null && (!Number.isInteger(to) || to < from || to > 2100)) err.push(`${at}: năm ngừng bán phải để trống (đang bán) hoặc không nhỏ hơn năm bắt đầu`);
+      if (m.keys && (!Array.isArray(m.keys) || m.keys.some(k => typeof k !== "string" || k.length > 40))) err.push(`${at}: từ khoá không hợp lệ`);
+    });
+  });
+  (cars.quick || []).forEach(q => {
+    const b = cars.brands.find(x => x.name === q.brand);
+    if (!b || !(b.models || []).some(m => m.name === q.model)) err.push(`Danh sách xe: mục chọn nhanh "${q.brand} ${q.model}" không còn trong danh sách`);
+  });
 }
 
 /* Kiểm tra dữ liệu trước khi lưu; trả về danh sách lỗi (rỗng = hợp lệ) */
@@ -122,6 +155,7 @@ function validate(c) {
     (p.colors || []).forEach(col => { if (!/^#[0-9a-fA-F]{6}$/.test(col[1] || "")) err.push(`Sản phẩm "${label}": mã màu "${col[1]}" không hợp lệ`); });
   });
   if (!c.hero.length) err.push("Trang chủ cần ít nhất 1 slide đầu trang");
+  if (c.cars) validateCars(c.cars, err);
   if (c.site.siteUrl && !/^https?:\/\/[^\s/]+\.[^\s/]+/.test(String(c.site.siteUrl).trim())) err.push("Địa chỉ website phải có dạng https://ten-mien.vn");
   return err;
 }

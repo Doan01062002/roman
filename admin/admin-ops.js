@@ -216,8 +216,28 @@ VIEWS.stats = async (v, [range = "30"]) => {
       section("Sản phẩm được xem nhiều", null, top(products.slice(0, 10), r => r.label, r => r.v, Math.max(1, ...products.map(x => x.v)))),
       section("Trang được xem nhiều", null, top(pages.slice(0, 10), r => r.label, r => r.v, Math.max(1, ...pages.map(x => x.v))))),
     section("Khách đến từ đâu", "Trang web đã dẫn khách tới website (Google, Facebook, Zalo…)", top(refRows, r => r.l, r => r.v, Math.max(1, ...refRows.map(r => r.v)))),
+    finderStats(st.finder, kpi, top),
     h("p", { class: "small muted" }, `Thống kê ẩn danh: không dùng cookie, không lưu địa chỉ IP, không đếm lượt xem của máy tìm kiếm. ${st.since ? `Bắt đầu ghi nhận từ ${dmy(st.since)}.` : "Chưa có lượt xem nào được ghi nhận."}`));
 };
+
+/* Khối "Tìm sản phẩm cho xe của bạn" ở trang chủ: khách tìm xe gì, lượt tư vấn, sản phẩm được gợi ý */
+const FD_TYPE_LABEL = { sedan: "Sedan", hatch: "Hatchback & xe đô thị", suv5: "SUV / CUV 5 chỗ", suv7: "SUV 7 chỗ", mpv: "MPV", pickup: "Bán tải", van16: "Xe 16 chỗ" };
+function finderStats(f, kpi, top) {
+  f = f || { cars: [], types: [], quiz: { start: 0, done: 0 }, picks: [] };
+  const searches = f.cars.reduce((a, r) => a + r.v, 0) + f.types.reduce((a, r) => a + r.v, 0);
+  const max = rows => Math.max(1, ...rows.map(r => r.v));
+  const sub = (t, body) => h("div", { class: "fd-stat" }, h("h3", { class: "mini-h" }, t), body);
+  return section("Tìm sản phẩm theo xe & tư vấn chọn thảm", "Khối cuối trang chủ: khách tìm xe gì, bao nhiêu người làm hết 6 câu tư vấn, sản phẩm nào được gợi ý nhiều",
+    h("div", { class: "stats" },
+      kpi("Lượt tìm theo xe", searches.toLocaleString("vi-VN"), "chọn dòng xe hoặc loại xe"),
+      kpi("Bắt đầu tư vấn", f.quiz.start.toLocaleString("vi-VN")),
+      kpi("Làm hết 6 câu", f.quiz.done.toLocaleString("vi-VN"), `${pct(f.quiz.done, f.quiz.start)} người bắt đầu`),
+      kpi("Dòng xe khác nhau", f.cars.length, "được tìm trong khoảng này")),
+    h("div", { class: "grid2" },
+      sub("Dòng xe được tìm nhiều", top(f.cars, r => r.name, r => r.v, max(f.cars))),
+      sub("Chọn theo loại xe", top(f.types, r => FD_TYPE_LABEL[r.id] || r.id, r => r.v, max(f.types)))),
+    sub("Sản phẩm được gợi ý nhiều (sau 6 câu tư vấn)", top(f.picks, r => r.name, r => r.v, max(f.picks))));
+}
 
 /* ===== Sửa giá nhanh ===== */
 VIEWS.prices = v => {

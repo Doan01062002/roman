@@ -77,7 +77,7 @@ function h(tag, props, ...kids) {
   return el;
 }
 /* Thay nội dung phần tử; bỏ qua null/false/"" và trải phẳng mảng */
-const put = (el, ...kids) => el.replaceChildren(...kids.flat(Infinity).filter(k => k != null && k !== false && k !== "").map(k => (k instanceof Node ? k : String(k))));
+const put = (el, ...kids) => { el.replaceChildren(...kids.flat(Infinity).filter(k => k != null && k !== false && k !== "").map(k => (k instanceof Node ? k : String(k)))); return el; };
 const iconBtn = (icon, label, disabled, fn, cls = "") => h("button", { type: "button", class: `icon-btn ${cls}`, title: label, "aria-label": label, disabled, onclick: fn, html: ICON[icon] });
 
 /* ---------- Trạng thái ---------- */
@@ -417,7 +417,7 @@ function reLogin() {
 /* ---------- Khung trang ---------- */
 const NAV = [
   ["Chung", [["dashboard", "Tổng quan", "home"], ["bookings", "Lịch hẹn", "cal"], ["calendar", "Lịch theo tháng", "calGrid"], ["customers", "Khách hàng", "users"], ["stats", "Thống kê truy cập", "chart"]]],
-  ["Nội dung website", [["products", "Sản phẩm & bảng giá", "box"], ["prices", "Sửa giá nhanh", "tag"], ["categories", "Danh mục", "grid"], ["home", "Trang chủ", "layout"], ["pages", "Trang nội dung", "file"], ["materials", "Chất liệu da", "leaf"], ["photos", "Thư viện ảnh", "image"]]],
+  ["Nội dung website", [["products", "Sản phẩm & bảng giá", "box"], ["prices", "Sửa giá nhanh", "tag"], ["categories", "Danh mục", "grid"], ["home", "Trang chủ", "layout"], ["cars", "Danh sách xe", "car"], ["pages", "Trang nội dung", "file"], ["materials", "Chất liệu da", "leaf"], ["photos", "Thư viện ảnh", "image"]]],
   ["Cài đặt", [["site", "Thông tin cửa hàng", "store"], ["telegram", "Thông báo Telegram", "bell"], ["seo", "SEO & chia sẻ", "search"], ["team", "Tài khoản & phân quyền", "shield"], ["activity", "Nhật ký hoạt động", "history"], ["backups", "Sao lưu", "archive"], ["account", "Tài khoản của tôi", "user"]]],
 ];
 /* Nhân viên chỉ thấy các màn vận hành; Quản trị viên thấy tất cả */
@@ -960,6 +960,103 @@ VIEWS.categories = v => {
         ];
       },
     }));
+};
+
+/* ===== Danh sách xe (khối "Tìm sản phẩm cho xe của bạn" ở cuối trang chủ) ===== */
+const CAR_TYPES = [["sedan", "Sedan"], ["hatch", "Hatchback & xe đô thị"], ["suv5", "SUV / CUV 5 chỗ"], ["suv7", "SUV 7 chỗ"], ["mpv", "MPV"], ["pickup", "Bán tải"], ["van16", "Xe 16 chỗ"]];
+const carPriceNote = m => (m.mini ? "Giá xe VF2 / VF3" : m.type === "van16" ? "Báo giá theo xe" : ["suv7", "mpv"].includes(m.type) ? "Giá xe 7 chỗ" : "Giá xe 5 chỗ");
+VIEWS.cars = v => {
+  setTitle("Danh sách xe");
+  const C = S.c.cars || (S.c.cars = { quick: [], brands: [] });
+  if (!Array.isArray(C.quick)) C.quick = [];
+  if (!Array.isArray(C.brands)) C.brands = [];
+  const MAX_QUICK = 8;
+
+  /* Chọn nhanh: các nút xe phổ biến ngay dưới thanh chọn xe */
+  const quickBox = h("div", { class: "car-quick" });
+  const drawQuick = () => {
+    const all = C.brands.flatMap(b => (b.models || []).filter(m => m.name).map(m => [b.name, m.name]));
+    const free = all.filter(([b, m]) => !C.quick.some(q => q.brand === b && q.model === m));
+    const add = h("select", { "aria-label": "Thêm xe chọn nhanh", onchange: () => {
+      if (!add.value) return;
+      const [brand, model] = JSON.parse(add.value);
+      C.quick.push({ brand, model }); dirty(); drawQuick();
+    } }, h("option", { value: "" }, C.quick.length >= MAX_QUICK ? `Tối đa ${MAX_QUICK} xe` : "+ Thêm xe chọn nhanh…"), free.map(([b, m]) => h("option", { value: JSON.stringify([b, m]) }, `${b} ${m}`)));
+    add.disabled = C.quick.length >= MAX_QUICK;
+    put(quickBox,
+      h("div", { class: "car-chips" }, C.quick.length ? C.quick.map((q, i) => h("span", { class: "car-chip" }, `${q.brand} ${q.model}`,
+        iconBtn("up", "Đưa lên trước", i === 0, () => { move(C.quick, i, -1); dirty(); drawQuick(); }, "mv"),
+        iconBtn("x", "Bỏ khỏi chọn nhanh", false, () => { C.quick.splice(i, 1); dirty(); drawQuick(); }, "mv"))) : h("span", { class: "muted small" }, "Chưa có xe chọn nhanh (dòng chọn nhanh sẽ bị ẩn trên website).")),
+      add);
+  };
+
+  /* Bảng dòng xe của một hãng */
+  const modelTable = b => {
+    const box = h("div", { class: "car-models" });
+    const draw = () => put(box,
+      b.models.length ? h("div", { class: "car-row car-head", "aria-hidden": "true" }, h("span", null, "Dòng xe"), h("span", null, "Loại xe"), h("span", null, "Từ năm"), h("span", null, "Đến năm"), h("span", null, "Bảng giá"), h("span")) : h("p", { class: "muted small" }, "Chưa có dòng xe nào."),
+      ...b.models.map((m, i) => {
+        let prev = m.name;
+        const note = h("small", { class: "car-note" }, carPriceNote(m));
+        const name = input(m, "name", { ph: "VD: Carnival", max: 60, on: val => { C.quick.forEach(q => { if (q.brand === b.name && q.model === prev) q.model = val; }); prev = val; drawQuick(); } });
+        name.setAttribute("aria-label", "Tên dòng xe");
+        const type = sel(m, "type", CAR_TYPES, { on: () => { note.textContent = carPriceNote(m); } });
+        type.setAttribute("aria-label", "Loại xe");
+        const year = (key, ph) => {
+          const el = h("input", { type: "number", inputmode: "numeric", min: 1950, max: 2100, value: m[key] == null ? "" : m[key], placeholder: ph, "aria-label": key === "from" ? "Năm bắt đầu bán" : "Năm ngừng bán (để trống nếu đang bán)" });
+          el.addEventListener("input", () => { m[key] = el.value === "" ? (key === "to" ? null : "") : Math.round(+el.value); dirty(); });
+          return el;
+        };
+        const mini = h("input", { type: "checkbox", checked: !!m.mini });
+        mini.addEventListener("change", () => { if (mini.checked) m.mini = true; else delete m.mini; note.textContent = carPriceNote(m); dirty(); });
+        const keys = h("input", { type: "text", value: (m.keys || []).join(", "), placeholder: "VD: carnival, sedona", class: "mono", "aria-label": "Từ khoá khớp sản phẩm làm riêng" });
+        keys.addEventListener("input", () => { const k = keys.value.split(",").map(x => x.trim().toLowerCase()).filter(Boolean).slice(0, 8); if (k.length) m.keys = k; else delete m.keys; dirty(); });
+        const row = h("div", { class: "car-row" + (m.keys && m.keys.length ? " show-keys" : "") });
+        return put(row,
+          name, type, year("from", "2020"), year("to", "Đang bán"),
+          h("div", { class: "car-price" }, note, h("label", { class: "check small" }, mini, "Dùng giá VF2 / VF3")),
+          h("div", { class: "car-tools" },
+            iconBtn("tag", "Từ khoá sản phẩm làm riêng (VD ghế Limousine)", false, () => { row.classList.toggle("show-keys"); if (row.classList.contains("show-keys")) keys.focus(); }, "mv"),
+            iconBtn("up", "Đưa lên", i === 0, () => { move(b.models, i, -1); dirty(); draw(); }, "mv"),
+            iconBtn("down", "Đưa xuống", i === b.models.length - 1, () => { move(b.models, i, 1); dirty(); draw(); }, "mv"),
+            iconBtn("trash", "Xóa dòng xe", false, () => {
+              const inQuick = C.quick.some(q => q.brand === b.name && q.model === m.name);
+              if (!confirm(`Xóa "${b.name} ${m.name}"?${inQuick ? "\nXe này cũng sẽ được bỏ khỏi mục Chọn nhanh." : ""}`)) return;
+              C.quick = C.quick.filter(q => !(q.brand === b.name && q.model === m.name));
+              b.models.splice(i, 1); dirty(); draw(); drawQuick();
+            }, "danger")),
+          h("div", { class: "car-adv" },
+            fld("Từ khoá sản phẩm làm riêng (cách nhau bằng dấu phẩy)", keys, { hint: "Khớp với tên tùy chọn giá của sản phẩm làm riêng cho dòng xe này, ví dụ ghế Limousine có tùy chọn \"Kia Carnival / Sedona\". Để trống nếu không có." })));
+      }),
+      h("button", { type: "button", class: "btn btn-sm add-row", onclick: () => {
+        const last = b.models[b.models.length - 1];
+        b.models.push({ name: "", type: last ? last.type : "sedan", from: new Date().getFullYear(), to: null }); dirty(); draw();
+        box.querySelectorAll(".car-row:not(.car-head) > input")[b.models.length - 1]?.focus();
+      } }, "+ Thêm dòng xe"));
+    draw();
+    return box;
+  };
+
+  const total = () => C.brands.reduce((a, b) => a + (b.models || []).length, 0);
+  v.append(
+    h("p", { class: "lead" }, "Hãng, dòng và đời xe khách chọn ở khối \"Tìm sản phẩm cho xe của bạn\" cuối trang chủ. Loại xe quyết định bảng giá (xe 5 chỗ hay 7 chỗ) hiển thị cho khách; giá lấy từ Sản phẩm & bảng giá."),
+    section("Chọn nhanh", `Nút xe phổ biến ngay dưới thanh chọn xe, tối đa ${MAX_QUICK} xe`, quickBox),
+    section(`Hãng & dòng xe`, `${C.brands.length} hãng · ${total()} dòng xe. Bấm vào từng hãng để sửa.`,
+      listEd(C.brands, {
+        title: b => `${b.name || "(chưa có tên hãng)"} · ${(b.models || []).length} dòng xe`, collapsed: true, addLabel: "Thêm hãng xe",
+        canDelete: b => (C.quick.some(q => q.brand === b.name) ? `Hãng "${b.name}" đang có xe trong mục Chọn nhanh. Bỏ các xe đó khỏi Chọn nhanh trước.` : ""),
+        add: () => ({ name: "", models: [] }),
+        onChange: drawQuick,
+        item: b => {
+          if (!Array.isArray(b.models)) b.models = [];
+          let prev = b.name;
+          return [
+            tf(b, "name", "Tên hãng *", { ph: "VD: Honda", max: 40, on: val => { C.quick.forEach(q => { if (q.brand === prev) q.brand = val; }); prev = val; drawQuick(); } }),
+            fld("Dòng xe", modelTable(b), { div: true, hint: "\"Đến năm\" để trống nếu xe còn đang bán. Website hiện các đời xe từ năm bắt đầu tới năm ngừng bán (hoặc năm nay)." }),
+          ];
+        },
+      })));
+  drawQuick();
 };
 
 /* ===== Trang chủ ===== */

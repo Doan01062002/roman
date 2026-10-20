@@ -1,6 +1,6 @@
 {
-  "rev": 11,
-  "updatedAt": "2026-10-19T08:56:10.535Z",
+  "rev": 12,
+  "updatedAt": "2026-10-20T04:24:34.870Z",
   "site": {
     "name": "ROMAN",
     "tagline": "Xưởng Chế Tác & Cá Nhân Hóa Nội Thất Ô Tô Cao Cấp",
@@ -1979,5 +1979,549 @@
       "description": "Trang bạn tìm không tồn tại hoặc đã được chuyển."
     }
   },
-  "updatedBy": "Claude"
+  "updatedBy": "Claude",
+  "cars": {
+    "quick": [
+      {
+        "brand": "VinFast",
+        "model": "VF 3"
+      },
+      {
+        "brand": "VinFast",
+        "model": "VF 5"
+      },
+      {
+        "brand": "VinFast",
+        "model": "VF 6"
+      },
+      {
+        "brand": "VinFast",
+        "model": "VF 7"
+      },
+      {
+        "brand": "VinFast",
+        "model": "VF 8"
+      },
+      {
+        "brand": "VinFast",
+        "model": "VF 9"
+      }
+    ],
+    "brands": [
+      {
+        "name": "VinFast",
+        "models": [
+          {
+            "name": "VF 3",
+            "type": "hatch",
+            "from": 2024,
+            "to": null,
+            "mini": true,
+            "keys": [
+              "vf3",
+              "vf 3"
+            ]
+          },
+          {
+            "name": "Minio Green (VF 2)",
+            "type": "hatch",
+            "from": 2025,
+            "to": null,
+            "mini": true,
+            "keys": [
+              "vf2",
+              "vf 2",
+              "minio"
+            ]
+          },
+          {
+            "name": "VF 5",
+            "type": "suv5",
+            "from": 2023,
+            "to": null
+          },
+          {
+            "name": "VF 6",
+            "type": "suv5",
+            "from": 2023,
+            "to": null
+          },
+          {
+            "name": "VF 7",
+            "type": "suv5",
+            "from": 2024,
+            "to": null
+          },
+          {
+            "name": "VF 8",
+            "type": "suv5",
+            "from": 2022,
+            "to": null
+          },
+          {
+            "name": "VF 9",
+            "type": "suv7",
+            "from": 2023,
+            "to": null
+          },
+          {
+            "name": "VF e34",
+            "type": "suv5",
+            "from": 2021,
+            "to": 2023
+          },
+          {
+            "name": "Limo Green",
+            "type": "mpv",
+            "from": 2025,
+            "to": null
+          },
+          {
+            "name": "Fadil",
+            "type": "hatch",
+            "from": 2019,
+            "to": 2022
+          },
+          {
+            "name": "Lux A2.0",
+            "type": "sedan",
+            "from": 2019,
+            "to": 2022
+          },
+          {
+            "name": "Lux SA2.0",
+            "type": "suv7",
+            "from": 2019,
+            "to": 2022
+          }
+        ]
+      },
+      {
+        "name": "Toyota",
+        "models": [
+          {
+            "name": "Wigo",
+            "type": "hatch",
+            "from": 2018,
+            "to": null
+          },
+          {
+            "name": "Vios",
+            "type": "sedan",
+            "from": 2014,
+            "to": null
+          },
+          {
+            "name": "Corolla Altis",
+            "type": "sedan",
+            "from": 2014,
+            "to": null
+          },
+          {
+            "name": "Camry",
+            "type": "sedan",
+            "from": 2012,
+            "to": null
+          },
+          {
+            "name": "Raize",
+            "type": "suv5",
+            "from": 2022,
+            "to": null
+          },
+          {
+            "name": "Yaris Cross",
+            "type": "suv5",
+            "from": 2023,
+            "to": null
+          },
+          {
+            "name": "Corolla Cross",
+            "type": "suv5",
+            "from": 2020,
+            "to": null
+          },
+          {
+            "name": "Veloz Cross",
+            "type": "mpv",
+            "from": 2022,
+            "to": null
+          },
+          {
+            "name": "Avanza Premio",
+            "type": "mpv",
+            "from": 2022,
+            "to": null
+          },
+          {
+            "name": "Innova / Innova Cross",
+            "type": "mpv",
+            "from": 2016,
+            "to": null
+          },
+          {
+            "name": "Fortuner",
+            "type": "suv7",
+            "from": 2017,
+            "to": null
+          },
+          {
+            "name": "Land Cruiser Prado",
+            "type": "suv7",
+            "from": 2010,
+            "to": null,
+            "keys": [
+              "prado",
+              "land cruiser"
+            ]
+          },
+          {
+            "name": "Land Cruiser",
+            "type": "suv7",
+            "from": 2008,
+            "to": null,
+            "keys": [
+              "land cruiser"
+            ]
+          },
+          {
+            "name": "Alphard",
+            "type": "mpv",
+            "from": 2015,
+            "to": null,
+            "keys": [
+              "alphard"
+            ]
+          },
+          {
+            "name": "Hilux",
+            "type": "pickup",
+            "from": 2015,
+            "to": null
+          },
+          {
+            "name": "Hiace",
+            "type": "van16",
+            "from": 2005,
+            "to": null
+          }
+        ]
+      },
+      {
+        "name": "Ford",
+        "models": [
+          {
+            "name": "Territory",
+            "type": "suv5",
+            "from": 2022,
+            "to": null
+          },
+          {
+            "name": "EcoSport",
+            "type": "suv5",
+            "from": 2014,
+            "to": 2021
+          },
+          {
+            "name": "Everest",
+            "type": "suv7",
+            "from": 2015,
+            "to": null
+          },
+          {
+            "name": "Explorer",
+            "type": "suv7",
+            "from": 2017,
+            "to": null
+          },
+          {
+            "name": "Ranger",
+            "type": "pickup",
+            "from": 2012,
+            "to": null
+          },
+          {
+            "name": "Focus",
+            "type": "sedan",
+            "from": 2013,
+            "to": 2019
+          },
+          {
+            "name": "Tourneo",
+            "type": "mpv",
+            "from": 2019,
+            "to": 2022,
+            "keys": [
+              "tourneo"
+            ]
+          },
+          {
+            "name": "Transit",
+            "type": "van16",
+            "from": 2014,
+            "to": null
+          }
+        ]
+      },
+      {
+        "name": "Hyundai",
+        "models": [
+          {
+            "name": "Grand i10",
+            "type": "hatch",
+            "from": 2014,
+            "to": null
+          },
+          {
+            "name": "Accent",
+            "type": "sedan",
+            "from": 2018,
+            "to": null
+          },
+          {
+            "name": "Elantra",
+            "type": "sedan",
+            "from": 2016,
+            "to": null
+          },
+          {
+            "name": "Venue",
+            "type": "suv5",
+            "from": 2023,
+            "to": null
+          },
+          {
+            "name": "Creta",
+            "type": "suv5",
+            "from": 2022,
+            "to": null
+          },
+          {
+            "name": "Tucson",
+            "type": "suv5",
+            "from": 2015,
+            "to": null
+          },
+          {
+            "name": "Santa Fe",
+            "type": "suv7",
+            "from": 2016,
+            "to": null
+          },
+          {
+            "name": "Palisade",
+            "type": "suv7",
+            "from": 2023,
+            "to": null
+          },
+          {
+            "name": "Stargazer",
+            "type": "mpv",
+            "from": 2022,
+            "to": null
+          },
+          {
+            "name": "Custin",
+            "type": "mpv",
+            "from": 2023,
+            "to": null
+          },
+          {
+            "name": "Solati",
+            "type": "van16",
+            "from": 2017,
+            "to": null
+          }
+        ]
+      },
+      {
+        "name": "Kia",
+        "models": [
+          {
+            "name": "Morning",
+            "type": "hatch",
+            "from": 2012,
+            "to": null
+          },
+          {
+            "name": "Soluto",
+            "type": "sedan",
+            "from": 2019,
+            "to": null
+          },
+          {
+            "name": "K3",
+            "type": "sedan",
+            "from": 2019,
+            "to": null
+          },
+          {
+            "name": "K5",
+            "type": "sedan",
+            "from": 2021,
+            "to": null
+          },
+          {
+            "name": "Sonet",
+            "type": "suv5",
+            "from": 2021,
+            "to": null
+          },
+          {
+            "name": "Seltos",
+            "type": "suv5",
+            "from": 2020,
+            "to": null
+          },
+          {
+            "name": "Sportage",
+            "type": "suv5",
+            "from": 2022,
+            "to": null
+          },
+          {
+            "name": "Sorento",
+            "type": "suv7",
+            "from": 2020,
+            "to": null
+          },
+          {
+            "name": "Carens",
+            "type": "mpv",
+            "from": 2022,
+            "to": null
+          },
+          {
+            "name": "Carnival",
+            "type": "mpv",
+            "from": 2021,
+            "to": null,
+            "keys": [
+              "carnival"
+            ]
+          },
+          {
+            "name": "Sedona",
+            "type": "mpv",
+            "from": 2015,
+            "to": 2021,
+            "keys": [
+              "sedona"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Mazda",
+        "models": [
+          {
+            "name": "Mazda2",
+            "type": "sedan",
+            "from": 2015,
+            "to": null
+          },
+          {
+            "name": "Mazda3",
+            "type": "sedan",
+            "from": 2015,
+            "to": null
+          },
+          {
+            "name": "Mazda6",
+            "type": "sedan",
+            "from": 2014,
+            "to": null
+          },
+          {
+            "name": "CX-3",
+            "type": "suv5",
+            "from": 2021,
+            "to": null
+          },
+          {
+            "name": "CX-30",
+            "type": "suv5",
+            "from": 2021,
+            "to": null
+          },
+          {
+            "name": "CX-5",
+            "type": "suv5",
+            "from": 2013,
+            "to": null
+          },
+          {
+            "name": "CX-8",
+            "type": "suv7",
+            "from": 2019,
+            "to": null
+          },
+          {
+            "name": "BT-50",
+            "type": "pickup",
+            "from": 2021,
+            "to": null
+          }
+        ]
+      },
+      {
+        "name": "Mercedes-Benz",
+        "models": [
+          {
+            "name": "C-Class",
+            "type": "sedan",
+            "from": 2015,
+            "to": null
+          },
+          {
+            "name": "E-Class",
+            "type": "sedan",
+            "from": 2016,
+            "to": null
+          },
+          {
+            "name": "S-Class",
+            "type": "sedan",
+            "from": 2014,
+            "to": null
+          },
+          {
+            "name": "GLC",
+            "type": "suv5",
+            "from": 2016,
+            "to": null
+          },
+          {
+            "name": "GLE",
+            "type": "suv5",
+            "from": 2016,
+            "to": null
+          },
+          {
+            "name": "GLS",
+            "type": "suv7",
+            "from": 2017,
+            "to": null
+          },
+          {
+            "name": "V-Class",
+            "type": "mpv",
+            "from": 2015,
+            "to": null,
+            "keys": [
+              "v-class",
+              "v250",
+              "v class"
+            ]
+          },
+          {
+            "name": "Sprinter",
+            "type": "van16",
+            "from": 2010,
+            "to": null
+          }
+        ]
+      }
+    ]
+  }
 }

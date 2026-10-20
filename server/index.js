@@ -208,6 +208,7 @@ async function saveContent(next, user, action = "Lưu nội dung") {
   next.updatedBy = user;
   await writeJSON(F.site, next);
   siteName = (next.site && next.site.name) || siteName;
+  setCarNames(next);
   await writeAtomic(path.join(ROOT, "js", "data.js"), buildDataJs(next));
   for (const f of PAGE_FILES) {
     const p = path.join(ROOT, f);
@@ -324,9 +325,34 @@ async function flushStats() {
   days.slice(0, Math.max(0, days.length - STAT_DAYS)).forEach(d => delete stats.days[d]);
   await writeJSON(F.stats, stats).catch(e => { statsDirty = true; console.error("[thống kê]", e.message); });
 }
+/* Sự kiện của khối "Tìm sản phẩm cho xe của bạn" (trang chủ): xe được tìm, loại xe, lượt tư vấn, sản phẩm được gợi ý.
+   Chỉ lưu tên xe / mã có sẵn, không lưu gì về người dùng. */
+const FD_TYPE_IDS = new Set(["sedan", "hatch", "suv5", "suv7", "mpv", "pickup", "van16"]);
+/* Chỉ ghi những xe có trong Danh sách xe (tránh dữ liệu rác) */
+let carNames = new Set();
+const setCarNames = c => { carNames = new Set(((c.cars && c.cars.brands) || []).flatMap(b => (b.models || []).map(m => `${b.name} ${m.name}`))); };
+function trackEvent(d, e, raw) {
+  const v = String(raw || "");
+  let bucket, key;
+  if (e === "car" && carNames.has(v)) { bucket = "car"; key = v; }
+  else if (e === "type" && FD_TYPE_IDS.has(v)) { bucket = "type"; key = v; }
+  else if (e === "quiz" && (v === "start" || v === "done")) { bucket = "quiz"; key = v; }
+  else if (e === "pick" && /^[a-z0-9-]{1,48}$/.test(v)) { bucket = "pick"; key = v; }
+  if (!bucket || !key) return false;
+  const fd = d.fd || (d.fd = { car: {}, type: {}, quiz: {}, pick: {} });
+  const o = fd[bucket];
+  if (o[key] === undefined && Object.keys(o).length >= 300) return false;
+  o[key] = (o[key] || 0) + 1;
+  return true;
+}
 function track(req, body) {
   const ua = String(req.headers["user-agent"] || "");
   if (!ua || BOT_UA.test(ua) || !trackLimit(clientIp(req))) return;
+  if (body.e) {
+    const d = dayVN(), day = stats.days[d] || (stats.days[d] = { v: 0, u: 0, pages: {}, refs: {} });
+    if (trackEvent(day, String(body.e), body.v)) statsDirty = true;
+    return;
+  }
   const p = trackPath(body.p);
   if (!p) return;
   const d = dayVN(), day = stats.days[d] || (stats.days[d] = { v: 0, u: 0, pages: {}, refs: {} });
@@ -346,18 +372,26 @@ async function statsReport(n) {
   c.products.forEach(p => { if (slugs[p.id]) byPath["/" + productPath(slugs[p.id])] = p.name; });
   const cats = Object.fromEntries(c.categories.map(x => [x.id, x.name]));
   const label = p => p === "/" ? "Trang chủ" : byPath[p] || (p.startsWith("/category.html") ? `Danh mục: ${cats[(p.split("=")[1] || "")] || "Tất cả dịch vụ"}` : { "/support.html": "Hỗ trợ & đặt lịch", "/about.html": "Giới thiệu", "/chinh-sach.html": "Chính sách", "/so-do-trang.html": "Sơ đồ trang" }[p] || p);
-  const days = [], pages = {}, refs = {};
+  const days = [], pages = {}, refs = {}, fd = { car: {}, type: {}, quiz: {}, pick: {} };
   for (let i = n - 1; i >= 0; i--) {
     const d = dayVN(Date.now() - i * 86400e3), x = stats.days[d] || { v: 0, u: 0, pages: {}, refs: {} };
     days.push({ d, v: x.v, u: x.u });
     for (const [k, v] of Object.entries(x.pages)) pages[k] = (pages[k] || 0) + v;
     for (const [k, v] of Object.entries(x.refs)) refs[k] = (refs[k] || 0) + v;
+    if (x.fd) for (const b of Object.keys(fd)) for (const [k, v] of Object.entries(x.fd[b] || {})) fd[b][k] = (fd[b][k] || 0) + v;
   }
   const top = o => Object.entries(o).sort((a, b) => b[1] - a[1]);
+  const pname = Object.fromEntries(c.products.map(p => [p.id, p.nick || p.name]));
   return {
     since: Object.keys(stats.days).sort()[0] || null, days,
     pages: top(pages).slice(0, 40).map(([path, v]) => ({ path, label: label(path), product: !!byPath[path], v })),
     refs: top(refs).slice(0, 15).map(([host, v]) => ({ host, v })),
+    finder: {
+      cars: top(fd.car).slice(0, 15).map(([name, v]) => ({ name, v })),
+      types: top(fd.type).map(([id, v]) => ({ id, v })),
+      quiz: { start: fd.quiz.start || 0, done: fd.quiz.done || 0 },
+      picks: top(fd.pick).filter(([id]) => pname[id]).slice(0, 10).map(([id, v]) => ({ id, name: pname[id], v })),
+    },
   };
 }
 
@@ -730,7 +764,7 @@ if (!fs.existsSync(F.site)) {
   process.exit(1);
 }
 (async () => {
-  try { siteName = JSON.parse(fs.readFileSync(F.site, "utf8")).site.name || siteName; } catch (e) { /* dùng tên mặc định */ }
+  try { const c0 = JSON.parse(fs.readFileSync(F.site, "utf8")); siteName = c0.site.name || siteName; setCarNames(c0); } catch (e) { /* dùng tên mặc định */ }
   try { generateSite(JSON.parse(fs.readFileSync(F.site, "utf8"))); } catch (e) { console.error("[seo]", e); }
   await loadStats();
   setInterval(flushStats, 60000).unref();

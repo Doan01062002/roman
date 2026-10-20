@@ -38,54 +38,24 @@ const fdIcon = id => `<svg class="fd-car" viewBox="0 0 124 44" aria-hidden="true
   ${FD_WHEELS[id].map(x => `<circle class="fd-wheel" cx="${x}" cy="34" r="5.2"/><circle class="fd-hub" cx="${x}" cy="34" r="1.7"/>`).join("")}
 </svg>`;
 
-/* ---------- Hãng, dòng, đời xe phổ biến tại Việt Nam ----------
-   [tên dòng, loại xe, năm đầu, năm cuối (null = đang bán), tuỳ chọn { cls, k: từ khoá khớp với tuỳ chọn giá của sản phẩm }] */
-const FD_BRANDS = [
-  ["VinFast", [
-    ["VF 3", "hatch", 2024, null, { cls: "mini", k: ["vf3", "vf 3"] }],
-    ["Minio Green (VF 2)", "hatch", 2025, null, { cls: "mini", k: ["vf2", "vf 2", "minio"] }],
-    ["VF 5", "suv5", 2023, null], ["VF 6", "suv5", 2023, null], ["VF 7", "suv5", 2024, null],
-    ["VF 8", "suv5", 2022, null], ["VF 9", "suv7", 2023, null], ["VF e34", "suv5", 2021, 2023],
-    ["Limo Green", "mpv", 2025, null], ["Fadil", "hatch", 2019, 2022],
-    ["Lux A2.0", "sedan", 2019, 2022], ["Lux SA2.0", "suv7", 2019, 2022],
-  ]],
-  ["Toyota", [
-    ["Wigo", "hatch", 2018, null], ["Vios", "sedan", 2014, null], ["Corolla Altis", "sedan", 2014, null], ["Camry", "sedan", 2012, null],
-    ["Raize", "suv5", 2022, null], ["Yaris Cross", "suv5", 2023, null], ["Corolla Cross", "suv5", 2020, null],
-    ["Veloz Cross", "mpv", 2022, null], ["Avanza Premio", "mpv", 2022, null], ["Innova / Innova Cross", "mpv", 2016, null],
-    ["Fortuner", "suv7", 2017, null], ["Land Cruiser Prado", "suv7", 2010, null, { k: ["prado", "land cruiser"] }],
-    ["Land Cruiser", "suv7", 2008, null, { k: ["land cruiser"] }], ["Alphard", "mpv", 2015, null, { k: ["alphard"] }],
-    ["Hilux", "pickup", 2015, null], ["Hiace", "van16", 2005, null],
-  ]],
-  ["Ford", [
-    ["Territory", "suv5", 2022, null], ["EcoSport", "suv5", 2014, 2021], ["Everest", "suv7", 2015, null],
-    ["Explorer", "suv7", 2017, null], ["Ranger", "pickup", 2012, null], ["Focus", "sedan", 2013, 2019],
-    ["Tourneo", "mpv", 2019, 2022, { k: ["tourneo"] }], ["Transit", "van16", 2014, null],
-  ]],
-  ["Hyundai", [
-    ["Grand i10", "hatch", 2014, null], ["Accent", "sedan", 2018, null], ["Elantra", "sedan", 2016, null],
-    ["Venue", "suv5", 2023, null], ["Creta", "suv5", 2022, null], ["Tucson", "suv5", 2015, null],
-    ["Santa Fe", "suv7", 2016, null], ["Palisade", "suv7", 2023, null],
-    ["Stargazer", "mpv", 2022, null], ["Custin", "mpv", 2023, null], ["Solati", "van16", 2017, null],
-  ]],
-  ["Kia", [
-    ["Morning", "hatch", 2012, null], ["Soluto", "sedan", 2019, null], ["K3", "sedan", 2019, null], ["K5", "sedan", 2021, null],
-    ["Sonet", "suv5", 2021, null], ["Seltos", "suv5", 2020, null], ["Sportage", "suv5", 2022, null],
-    ["Sorento", "suv7", 2020, null], ["Carens", "mpv", 2022, null],
-    ["Carnival", "mpv", 2021, null, { k: ["carnival"] }], ["Sedona", "mpv", 2015, 2021, { k: ["sedona"] }],
-  ]],
-  ["Mazda", [
-    ["Mazda2", "sedan", 2015, null], ["Mazda3", "sedan", 2015, null], ["Mazda6", "sedan", 2014, null],
-    ["CX-3", "suv5", 2021, null], ["CX-30", "suv5", 2021, null], ["CX-5", "suv5", 2013, null],
-    ["CX-8", "suv7", 2019, null], ["BT-50", "pickup", 2021, null],
-  ]],
-  ["Mercedes-Benz", [
-    ["C-Class", "sedan", 2015, null], ["E-Class", "sedan", 2016, null], ["S-Class", "sedan", 2014, null],
-    ["GLC", "suv5", 2016, null], ["GLE", "suv5", 2016, null], ["GLS", "suv7", 2017, null],
-    ["V-Class", "mpv", 2015, null, { k: ["v-class", "v250", "v class"] }], ["Sprinter", "van16", 2010, null],
-  ]],
-].map(([name, models]) => ({ name, models: models.map(([m, type, from, to, x = {}]) => ({ name: m, type, from, to, cls: x.cls, k: x.k || [] })) }));
-const FD_QUICK = ["VF 3", "VF 5", "VF 6", "VF 7", "VF 8", "VF 9"];
+/* ---------- Hãng, dòng, đời xe: sửa trong trang quản trị (Nội dung website > Danh sách xe), lưu ở CARS (data.js) ----------
+   mini = bảng giá xe VF2 / VF3; keys = từ khoá khớp với tuỳ chọn giá của sản phẩm làm riêng (ghế Limousine cho Carnival...) */
+const FD_CARS = typeof CARS !== "undefined" && CARS && Array.isArray(CARS.brands) ? CARS : { brands: [], quick: [] };
+const FD_BRANDS = FD_CARS.brands.filter(b => b && b.name).map(b => ({
+  name: b.name,
+  models: (b.models || []).filter(m => m && m.name && fdType(m.type))
+    .map(m => ({ name: m.name, type: m.type, from: +m.from || 2000, to: m.to ? +m.to : null, cls: m.mini ? "mini" : undefined, k: m.keys || [] })),
+})).filter(b => b.models.length);
+const FD_QUICK = (FD_CARS.quick || []).filter(q => FD_BRANDS.some(b => b.name === q.brand && b.models.some(m => m.name === q.model)));
+const fdQuickLabel = m => m.replace(/^([A-Za-z]{1,3}) (\d)$/, "$1$2");
+
+/* Ghi thống kê ẩn danh (xe được tìm, lượt tư vấn, sản phẩm được gợi ý) về trang quản trị, cùng điều kiện với thống kê lượt xem */
+const fdTrack = (e, v) => {
+  try {
+    if (/^\/api\//.test(SITE.formEndpoint || "") && navigator.sendBeacon && navigator.doNotTrack !== "1" && /^https?:/.test(location.protocol))
+      navigator.sendBeacon("/api/track", new Blob([JSON.stringify({ e, v })], { type: "application/json" }));
+  } catch (err) { /* thống kê không được làm hỏng trang */ }
+};
 
 /* ---------- Giá theo xe ---------- */
 const fdVnd = n => n.toLocaleString("vi-VN") + "đ";
@@ -103,6 +73,8 @@ function fdPrice(p, car) {
   const best = idx.reduce((a, b) => (p.prices[b] < p.prices[a] ? b : a));
   return { price: p.prices[best], opt: p.options[best], from: idx.length > 1 };
 }
+/* Trên điện thoại mỗi nhóm kết quả chỉ hiện trước 3 sản phẩm, còn lại bấm "Xem thêm" */
+const FD_PHONE_LIMIT = 3;
 const FD_GROUPS = [["san", "Sàn & thảm lót chân"], ["ghe-da", "Ghế da"], ["taplo", "Thảm taplo"]];
 
 /* Hai dòng sàn/thảm, mỗi dòng ba cấp (xếp theo giá xe 5 chỗ) */
@@ -158,7 +130,7 @@ function initFinder() {
       <h2 class="section-title">Tìm sản phẩm cho xe của bạn</h2>
       <p class="section-sub">Chọn hãng, dòng và đời xe. ROMAN hiển thị sản phẩm và giá theo đúng chiếc xe đó.</p>
     </header>
-    <div class="fd-card">
+    <div class="fd-card"${FD_BRANDS.length ? "" : " hidden"}>
       <div class="fd-bar">
         ${[["brand", "01", "Hãng xe"], ["model", "02", "Dòng xe"], ["year", "03", "Đời xe"]].map(([k, n, t]) => `
         <button type="button" class="fd-step" data-step="${k}" aria-expanded="false" aria-controls="fdPanel">
@@ -169,9 +141,9 @@ function initFinder() {
         <button type="button" class="btn fd-go" id="fdGo" disabled>Xem sản phẩm <span aria-hidden="true">→</span></button>
       </div>
       <div class="fd-panel" id="fdPanel" role="group" hidden></div>
-      <div class="fd-quick">
+      <div class="fd-quick"${FD_QUICK.length ? "" : " hidden"}>
         <span class="fd-quick-k">Chọn nhanh</span>
-        ${FD_QUICK.map(m => `<button type="button" class="fd-chip" data-quick="${esc(m)}">${esc(m.replace(" ", ""))}</button>`).join("")}
+        ${FD_QUICK.map((q, i) => `<button type="button" class="fd-chip" data-quick="${i}" title="${esc(q.brand + " " + q.model)}">${esc(fdQuickLabel(q.model))}</button>`).join("")}
         <button type="button" class="fd-miss" id="fdMiss">Không thấy xe của bạn?</button>
       </div>
     </div>
@@ -219,11 +191,11 @@ function initFinder() {
 
   const carFromModel = () => {
     const m = modelObj(), t = fdType(m.type);
-    return { label: `${st.brand} ${m.name}${st.year ? ` · đời ${st.year}` : ""}`, xe: `${st.brand} ${m.name}${st.year ? ` ${st.year}` : ""}`, type: t.id, cls: m.cls || t.cls, body: t.body, k: m.k };
+    return { src: "car", model: `${st.brand} ${m.name}`, label: `${st.brand} ${m.name}${st.year ? ` · đời ${st.year}` : ""}`, xe: `${st.brand} ${m.name}${st.year ? ` ${st.year}` : ""}`, type: t.id, cls: m.cls || t.cls, body: t.body, k: m.k };
   };
   go.addEventListener("click", () => { st.open = null; syncBar(); showResults(carFromModel()); });
   $$(".fd-chip", root).forEach(b => b.addEventListener("click", () => {
-    st.brand = "VinFast"; st.model = b.dataset.quick; st.year = null; st.open = null; syncBar(); showResults(carFromModel());
+    const q = FD_QUICK[+b.dataset.quick]; st.brand = q.brand; st.model = q.model; st.year = null; st.open = null; syncBar(); showResults(carFromModel());
   }));
   $("#fdMiss", root).addEventListener("click", () => {
     if (st.stage !== "types") { st.stage = "types"; renderStage(); }
@@ -233,9 +205,9 @@ function initFinder() {
   });
 
   /* ----- Kết quả theo xe ----- */
-  const resultCard = (p, pr) => {
+  const resultCard = (p, pr, extra) => {
     const pid = p.photos && p.photos[0];
-    return `<a class="fd-prod" href="${pUrl(p)}">
+    return `<a class="fd-prod${extra ? " is-extra" : ""}" href="${pUrl(p)}">
       <div class="fd-prod-img">${pid ? `<img src="${ph(pid, "sm")}" alt="${esc(PHOTO_ALT[pid] || p.name)}" loading="lazy">` : ""}${p.tag ? `<span class="fd-tag">${esc(p.tag)}</span>` : ""}</div>
       <div class="fd-prod-body">
         <h4>${esc(p.nick || p.name)}</h4>
@@ -246,6 +218,7 @@ function initFinder() {
   };
   function showResults(car) {
     st.lastCar = car;
+    if (car.src === "car") fdTrack("car", car.model); else if (car.src === "type") fdTrack("type", car.type);
     const groups = FD_GROUPS.map(([cat, title]) => [title, PRODUCTS.filter(p => p.cat === cat).map(p => [p, fdPrice(p, car)]).filter(([, pr]) => pr)])
       .filter(([, list]) => list.length);
     /* sản phẩm làm riêng cho đúng dòng xe (ghế Limousine cho Carnival, Alphard, V-Class...) */
@@ -270,10 +243,19 @@ function initFinder() {
           <a class="btn btn-dark btn-sm" href="support.html?xe=${encodeURIComponent(car.xe)}#lien-he">Đặt lịch xem mẫu</a>
         </div>
       </div>
-      ${shown.length ? shown.map(([title, list]) => `<div class="fd-res-group"><p class="fd-res-gt">${esc(title)}</p><div class="fd-res-grid">${list.map(([p, pr]) => resultCard(p, pr)).join("")}</div></div>`).join("")
+      ${shown.length ? shown.map(([title, list]) => `<div class="fd-res-group"><p class="fd-res-gt">${esc(title)} <span>${list.length}</span></p>
+        <div class="fd-res-grid">${list.map(([p, pr], i) => resultCard(p, pr, i >= FD_PHONE_LIMIT)).join("")}</div>
+        ${list.length > FD_PHONE_LIMIT ? `<button type="button" class="fd-more" aria-expanded="false" data-more="${list.length - FD_PHONE_LIMIT}">Xem thêm ${list.length - FD_PHONE_LIMIT} sản phẩm</button>` : ""}</div>`).join("")
         : `<p class="fd-res-empty">${esc(t.name)} được báo giá theo từng xe. Gọi <a href="tel:${telOf(SITE.hotline)}">${esc(SITE.hotline)}</a> hoặc đặt lịch để ROMAN đo và báo giá chính xác.</p>`}
       <p class="fd-res-note">Vô lăng, trần, dán nội thất được báo giá theo hạng mục: <a href="category.html?cat=vo-lang">vô lăng</a> · <a href="category.html?cat=tran">trần</a> · <a href="category.html?cat=nhua">dán nội thất</a>.</p>`;
     $("[data-act=quiz]", results).addEventListener("click", () => startQuiz(car.type));
+    $$(".fd-more", results).forEach(b => b.addEventListener("click", () => {
+      const g = b.closest(".fd-res-group"), open = !g.classList.contains("is-open");
+      g.classList.toggle("is-open", open);
+      b.setAttribute("aria-expanded", String(open));
+      b.textContent = open ? "Thu gọn" : `Xem thêm ${b.dataset.more} sản phẩm`;
+      if (!open) g.scrollIntoView({ behavior: "smooth", block: "start" });
+    }));
     results.classList.remove("is-in"); void results.offsetWidth; results.classList.add("is-in");
     requestAnimationFrame(() => results.scrollIntoView({ behavior: "smooth", block: "start" }));
   }
@@ -295,7 +277,7 @@ function initFinder() {
         <div class="fd-alt-head"><p class="fd-alt-k">Hoặc chọn theo loại xe</p><button type="button" class="fd-alt-link" data-act="quiz">Chưa biết chọn thảm nào? Tư vấn 1 phút <span aria-hidden="true">→</span></button></div>
         <div class="fd-types">${FD_TYPES.map(t => typeBtn(t, false)).join("")}</div>
       </div>`;
-      $$(".fd-type", stage).forEach(b => b.addEventListener("click", () => { const t = fdType(b.dataset.type); showResults({ label: t.name, xe: t.name, type: t.id, cls: t.cls, body: t.body, k: [] }); }));
+      $$(".fd-type", stage).forEach(b => b.addEventListener("click", () => { const t = fdType(b.dataset.type); showResults({ src: "type", label: t.name, xe: t.name, type: t.id, cls: t.cls, body: t.body, k: [] }); }));
       $("[data-act=quiz]", stage).addEventListener("click", () => startQuiz(st.lastCar?.type));
       return;
     }
@@ -304,7 +286,8 @@ function initFinder() {
   }
 
   function startQuiz(type) {
-    st.stage = "quiz"; st.step = 0; st.ans = { who: [] };
+    st.stage = "quiz"; st.step = 0; st.ans = { who: [] }; st.quizDone = false;
+    fdTrack("quiz", "start");
     if (type) st.ans.type = type;
     renderStage();
     stage.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -376,6 +359,7 @@ function initFinder() {
     const a = st.ans, t = fdType(a.type) || FD_TYPES[0];
     const car = { cls: t.cls, body: t.body, k: [] };
     const { main, alts, why } = recommend();
+    if (!st.quizDone) { st.quizDone = true; fdTrack("quiz", "done"); fdTrack("pick", main.id); }
     const optName = (qid, id) => FD_Q.find(q => q.id === qid).options.find(o => o.id === id)?.t;
     const chips = [
       ["Xe", t.name],
