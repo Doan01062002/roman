@@ -273,21 +273,29 @@ function initRail(sec) {
   let raf = 0;
   const draw = () => {
     raf = 0;
-    const max = rail.scrollWidth - rail.clientWidth, w = rail.clientWidth / rail.scrollWidth, x = rail.scrollLeft;
-    bar.style.width = w * 100 + "%";
+    const max = rail.scrollWidth - rail.clientWidth, w = rail.scrollWidth ? rail.clientWidth / rail.scrollWidth : 1, x = rail.scrollLeft;
+    bar.style.width = Math.min(100, w * 100) + "%";
     bar.style.transform = `translateX(${(max > 0 ? x / max : 0) * (1 / w - 1) * 100}%)`;
     prev.disabled = x <= 2;
     next.disabled = x >= max - 2;
   };
   const sync = () => { if (!raf) raf = requestAnimationFrame(draw); };
-  $$(".rail-btn", sec).forEach(b => b.onclick = () => rail.scrollBy({ left: +b.dataset.dir * rail.clientWidth * .8, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" }));
-  /* Băng chuyền chỉ cuộn ngang: nếu bị lệch dọc (bấm Tab, cuộn tới phần tử...) thì đưa về ngay */
+  $$(".rail-btn", sec).forEach(b => b.onclick = () => {
+    const card = rail.querySelector(".rcard");
+    const gap = parseFloat(getComputedStyle(rail).columnGap || getComputedStyle(rail).gap) || 24;
+    const step = card ? (card.getBoundingClientRect().width + gap) * 2 : rail.clientWidth * 0.8;
+    rail.scrollBy({ left: +b.dataset.dir * step, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  });
+  /* B?ng chuy?n ch? cu?n ngang: n?u b? l?ch d?c (b?m Tab, cu?n t?i ph?n t?...) th? ??a v? ngay */
   rail.addEventListener("scroll", () => { if (rail.scrollTop) rail.scrollTop = 0; sync(); }, { passive: true }); addEventListener("resize", sync); draw();
 }
 const railShell = (title, items) => `<h2 class="rail-title">${esc(title)}</h2>
-  <div class="rail" role="region" aria-label="${esc(title)}" tabindex="0">${items}</div>
-  <div class="rail-ctrl"><div class="rail-bar"><span></span></div>
-    <button class="rail-btn" data-dir="-1" aria-label="Trước"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button><button class="rail-btn" data-dir="1" aria-label="Sau"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>`;
+  <div class="rail-stage">
+    <button class="rail-btn rail-btn--prev" data-dir="-1" aria-label="Tr??c"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+    <div class="rail" role="region" aria-label="${esc(title)}" tabindex="0">${items}</div>
+    <button class="rail-btn rail-btn--next" data-dir="1" aria-label="Sau"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+  </div>
+  <div class="rail-ctrl"><div class="rail-bar"><span></span></div></div>`;
 
 const videoAsset = name => `assets/video/${name}?v=2`;
 
