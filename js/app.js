@@ -638,7 +638,7 @@ function initProduct() {
     $("#pd").innerHTML = `${gallery}
       <div class="pd-info">
         <div class="pd-badges">
-          <a class="pd-cat-pill" href="${subUrl}">${esc(cat.name)} · ${esc(p.sub)}</a>
+          <a class="pd-cat-pill" href="${subUrl}">${(p.sub && p.sub !== cat.name) ? `${esc(cat.name)} · ${esc(p.sub)}` : esc(cat.name)}</a>
           ${p.tag ? `<span class="pd-tag-pill">${esc(p.tag)}</span>` : ""}
         </div>
         <h1>${esc(p.name)}</h1>

@@ -408,7 +408,7 @@ $show_admin_bar = is_user_logged_in();
 <div id="footer"></div>
 <script src="/js/data.js?v=d<?php echo esc_attr($rev); ?>"></script>
 <script src="/js/art.js?v=29"></script>
-<script src="/js/app.js?v=53"></script>
+<script src="/js/app.js?v=54"></script>
 <?php if ($page_type === 'home'): ?>
 <script src="/js/finder.js?v=4"></script>
 <?php endif; ?>

@@ -1,5 +1,5 @@
 /* TỆP TỰ SINH từ content/site.json bởi trang quản trị (/admin). Đừng sửa tay: mọi thay đổi sẽ bị ghi đè khi lưu.
-   Phiên bản nội dung: 13 */
+   Phiên bản nội dung: 14 */
 const SITE = {
  "name": "ROMAN",
  "tagline": "Xưởng Chế Tác & Cá Nhân Hóa Nội Thất Ô Tô Cao Cấp",
