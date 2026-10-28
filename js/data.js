@@ -1,5 +1,5 @@
 /* TỆP TỰ SINH từ content/site.json bởi trang quản trị (/admin). Đừng sửa tay: mọi thay đổi sẽ bị ghi đè khi lưu.
-   Phiên bản nội dung: 12 */
+   Phiên bản nội dung: 13 */
 const SITE = {
  "name": "ROMAN",
  "tagline": "Xưởng Chế Tác & Cá Nhân Hóa Nội Thất Ô Tô Cao Cấp",
@@ -75,16 +75,16 @@ const CATEGORIES = [
  },
  {
   "id": "tran",
-  "name": "Trần da lộn",
+  "name": "Trần sao",
   "shape": "headliner",
   "color": "#18181c",
   "tex": "star",
   "hue": 240,
   "photo": "tran-02",
-  "desc": "Bọc trần da lộn Alcantara & trần sao rơi Starlight sợi quang",
+  "desc": "Trần sao rơi Starlight sợi quang & bọc trần da lộn Alcantara",
   "sub": [
-   "Trần da lộn",
-   "Trần sao"
+   "Trần sao",
+   "Trần da lộn"
   ]
  },
  {
@@ -1486,9 +1486,9 @@ const HERO_SLIDES = [
   "alt": "Khoang lái bọc da bò Ý màu Cognac, vô lăng khâu tay và hàng ghế sau chần kim cương"
  },
  {
-  "eyebrow": "TRẦN DA LỘN",
-  "title": "Trần Da Lộn & Trần Sao",
-  "sub": "Trần da lộn và trần sao, may đo theo từng dòng xe.",
+  "eyebrow": "TRẦN SAO",
+  "title": "Trần Sao & Trần Da Lộn",
+  "sub": "Trần sao và trần da lộn, may đo theo từng dòng xe.",
   "cta": "Khám phá",
   "link": "category.html?cat=tran",
   "hue": 215,
@@ -1886,10 +1886,10 @@ const PAGES = {
  "about": {
   "eyebrow": "VỀ ROMAN",
   "title": "Nghệ Thuật Chế Tác Nội Thất Ô Tô Thủ Công",
-  "lead": "Ghế da ROMAN (Sumi Fiber, Nappa Fiber, Nappa Fiber Pro, Nappa Clear), ghế điện, sàn ROMAN 360, thảm ROMAN và trần da lộn, niêm yết giá theo từng dòng xe.",
+  "lead": "Ghế da ROMAN (Sumi Fiber, Nappa Fiber, Nappa Fiber Pro, Nappa Clear), ghế điện, sàn ROMAN 360, thảm ROMAN và trần sao, niêm yết giá theo từng dòng xe.",
   "heroEyebrow": "CỬA HÀNG & TỔNG KHO TẠI HÀ NỘI",
   "heroTitle": "Mỗi Khoang Lái Là Một Tác Phẩm Độc Bản",
-  "heroBody": "**ROMAN** chuyên bọc ghế da, ghế điện, sàn, thảm và trần da lộn cho ô tô, với bảng giá niêm yết rõ ràng theo từng dòng xe: VF2/VF3, xe 5 chỗ và xe 7 chỗ.\n\nCửa hàng ở {store} và tổng kho ở {warehouse}. Bạn có thể đến xem mẫu da, chọn màu trực tiếp hoặc gọi hotline để được tư vấn trước.",
+  "heroBody": "**ROMAN** chuyên bọc ghế da, ghế điện, sàn, thảm và trần sao cho ô tô, với bảng giá niêm yết rõ ràng theo từng dòng xe: VF2/VF3, xe 5 chỗ và xe 7 chỗ.\n\nCửa hàng ở {store} và tổng kho ở {warehouse}. Bạn có thể đến xem mẫu da, chọn màu trực tiếp hoặc gọi hotline để được tư vấn trước.",
   "heroImage": "xuong-01",
   "stats": [
    {
@@ -2027,7 +2027,7 @@ const PAGES = {
     "Bọc sàn",
     "Khâu vô lăng",
     "Dán chi tiết nhựa",
-    "Trần da lộn",
+    "Trần sao",
     "Thảm taplo",
     "Bảo hành",
     "Khác"
@@ -2046,7 +2046,7 @@ const PAGES = {
    {
     "id": "bao-hanh",
     "title": "Chính sách bảo hành",
-    "body": "Thời hạn và phạm vi bảo hành phụ thuộc vào từng hạng mục (ghế da, ghế điện, sàn, thảm, trần da lộn...) và chất liệu đã chọn. ROMAN xác nhận cụ thể với khách hàng khi đặt lịch hoặc bàn giao xe.\n\n### Quy trình bảo hành\n\n1. Liên hệ hotline [{hotline}](tel:{hotlineTel}) hoặc [{hotline2}](tel:{hotline2Tel}) và cho biết họ tên, số điện thoại, dòng xe, hạng mục đã thực hiện.\n2. Mang xe đến cửa hàng ROMAN tại {store} để nhân viên kiểm tra tình trạng thực tế.\n3. ROMAN thông báo kết quả kiểm tra và hướng xử lý (sửa chữa, thay thế hoặc tư vấn bảo dưỡng) tùy từng trường hợp.\n\n### Các trường hợp thường không thuộc phạm vi bảo hành\n\n- Hư hỏng do va chạm, tai nạn, cháy nổ hoặc thiên tai.\n- Sử dụng sai cách, vệ sinh bằng hóa chất không phù hợp với chất liệu.\n- Tự ý tháo, sửa hoặc can thiệp vào sản phẩm bởi đơn vị khác.\n- Hao mòn tự nhiên theo thời gian và cường độ sử dụng.\n\nĐể biết thời hạn bảo hành chính xác của hạng mục bạn quan tâm, vui lòng liên hệ hotline."
+    "body": "Thời hạn và phạm vi bảo hành phụ thuộc vào từng hạng mục (ghế da, ghế điện, sàn, thảm, trần sao...) và chất liệu đã chọn. ROMAN xác nhận cụ thể với khách hàng khi đặt lịch hoặc bàn giao xe.\n\n### Quy trình bảo hành\n\n1. Liên hệ hotline [{hotline}](tel:{hotlineTel}) hoặc [{hotline2}](tel:{hotline2Tel}) và cho biết họ tên, số điện thoại, dòng xe, hạng mục đã thực hiện.\n2. Mang xe đến cửa hàng ROMAN tại {store} để nhân viên kiểm tra tình trạng thực tế.\n3. ROMAN thông báo kết quả kiểm tra và hướng xử lý (sửa chữa, thay thế hoặc tư vấn bảo dưỡng) tùy từng trường hợp.\n\n### Các trường hợp thường không thuộc phạm vi bảo hành\n\n- Hư hỏng do va chạm, tai nạn, cháy nổ hoặc thiên tai.\n- Sử dụng sai cách, vệ sinh bằng hóa chất không phù hợp với chất liệu.\n- Tự ý tháo, sửa hoặc can thiệp vào sản phẩm bởi đơn vị khác.\n- Hao mòn tự nhiên theo thời gian và cường độ sử dụng.\n\nĐể biết thời hạn bảo hành chính xác của hạng mục bạn quan tâm, vui lòng liên hệ hotline."
    },
    {
     "id": "bao-mat",

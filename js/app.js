@@ -203,7 +203,7 @@ function renderFooter() {
   const ext = ' <span aria-hidden="true">↗</span>';
   const cols = [
     ["Sản Phẩm & Dịch Vụ", [...CATEGORIES.map(c => `<a href="category.html?cat=${c.id}">${esc(c.name)}</a>`), `<a href="category.html?cat=ghe-da&sub=${encodeURIComponent("Ghế Limousine")}">Ghế chủ tịch Limousine</a>`]],
-    ["Chất Liệu & Hạng Mục", [["Ghế Chủ Tịch Limousine", "limo-hermes"], ["Ghế Limousine Maybach", "limo-maybach"], ["Ghế da Sumi Fiber", "ghe-cong-nghiep"], ["Ghế da Nappa Fiber", "ghe-nappa-6d"], ["Ghế da Nappa Fiber Pro", "ghe-da-bo-y"], ["Ghế da Nappa Clear", "ghe-nappa-clear"], ["Ghế điện", "ghe-dien"], ["Sàn ROMAN 360 Premium", "san-6d"], ["Thảm ROMAN Signature", "tham-san-duc"], ["Trần da lộn", "tran-da-lon"]].map(([n, id]) => { const p = PRODUCTS.find(x => x.id === id); return p ? `<a href="${pUrl(p)}">${n}</a>` : ""; }).filter(Boolean)],
+    ["Chất Liệu & Hạng Mục", [["Ghế Chủ Tịch Limousine", "limo-hermes"], ["Ghế Limousine Maybach", "limo-maybach"], ["Ghế da Sumi Fiber", "ghe-cong-nghiep"], ["Ghế da Nappa Fiber", "ghe-nappa-6d"], ["Ghế da Nappa Fiber Pro", "ghe-da-bo-y"], ["Ghế da Nappa Clear", "ghe-nappa-clear"], ["Ghế điện", "ghe-dien"], ["Sàn ROMAN 360 Premium", "san-6d"], ["Thảm ROMAN Signature", "tham-san-duc"], ["Trần sao Starlight", "tran-sao"], ["Trần da lộn", "tran-da-lon"]].map(([n, id]) => { const p = PRODUCTS.find(x => x.id === id); return p ? `<a href="${pUrl(p)}">${n}</a>` : ""; }).filter(Boolean)],
     ["Mua Sắm & Đặt Lịch", ['<a href="category.html">Bảng giá niêm yết</a>', '<a href="support.html#lien-he">Đặt lịch thi công tại xưởng</a>', '<a href="support.html?dv=limo-hermes#lien-he">Đặt chế tác ghế Limousine</a>', '<a href="about.html#cua-hang">Trực tiếp xem mẫu da</a>', '<a href="about.html#cua-hang">Cửa hàng &amp; tổng kho</a>']],
     ["Hỗ Trợ", ['<a href="support.html">Trung tâm hỗ trợ</a>', '<a href="support.html#faq">Câu hỏi thường gặp</a>', '<a href="chinh-sach.html#bao-hanh">Chính sách bảo hành</a>', `<a href="tel:${tel}">Hotline: ${esc(SITE.hotline)}</a>`, `<a href="tel:${esc(SITE.hotline2.replace(/\s/g, ""))}">Hotline: ${esc(SITE.hotline2)}</a>`, `<a href="mailto:${esc(SITE.email)}">Email hỗ trợ${ext}</a>`]],
     ["Giới Thiệu", ['<a href="about.html">Câu chuyện thương hiệu</a>', '<a href="about.html#quy-trinh">Quy trình chế tác</a>', '<a href="about.html#cua-hang">Cửa hàng &amp; tổng kho</a>', ...(PAGES.about.jobs.items.length ? ['<a href="about.html#tuyen-dung">Tuyển dụng</a>'] : [])]],
@@ -607,7 +607,7 @@ function initProduct() {
   const cat = catById(p.cat);
   const subUrl = p.sub ? `category.html?cat=${cat.id}&sub=${encodeURIComponent(p.sub)}` : `category.html?cat=${cat.id}`;
   document.title = `${p.name} | ${SITE.name}`;
-  $("#crumbs").innerHTML = `<a href="index.html">Trang chủ</a> / <a href="category.html?cat=${cat.id}">${esc(cat.name)}</a>${p.sub ? ` / <a href="${subUrl}">${esc(p.sub)}</a>` : ""} / ${esc(p.name)}`;
+  $("#crumbs").innerHTML = `<a href="index.html">Trang chủ</a> / <a href="category.html?cat=${cat.id}">${esc(cat.name)}</a>${p.sub && p.sub !== cat.name && p.sub !== p.name ? ` / <a href="${subUrl}">${esc(p.sub)}</a>` : ""} / ${esc(p.name)}`;
   let color = 0, option = 0, shot = 0;
   const colorShotMap = {
     "ghe-nappa-6d": { 0: 0, 1: 1, 2: 2, 3: 4 },

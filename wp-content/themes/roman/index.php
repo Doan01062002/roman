@@ -83,7 +83,7 @@ if ($req_Trim === '' || $req_Trim === 'index.html' || is_front_page() || is_home
 // Thiết lập tiêu đề, mô tả & canonical theo từng trang
 $site_name = $site['name'] ?? 'ROMAN';
 $title = $site_name . ' | ' . ($site['tagline'] ?? 'Xưởng Chế Tác & Cá Nhân Hóa Nội Thất Ô Tô Cao Cấp');
-$desc = 'ROMAN: ghế da Sumi Fiber, Nappa Fiber, Nappa Fiber Pro, Nappa Clear, ghế điện, sàn ROMAN 360, thảm ROMAN và trần da lộn. Cửa hàng tại 763 Nguyễn Văn Linh, Long Biên, Hà Nội.';
+$desc = 'ROMAN: ghế da Sumi Fiber, Nappa Fiber, Nappa Fiber Pro, Nappa Clear, ghế điện, sàn ROMAN 360, thảm ROMAN và trần sao. Cửa hàng tại 763 Nguyễn Văn Linh, Long Biên, Hà Nội.';
 $canonical = '/';
 $og_img = '/assets/photos/ghe-04-xl.jpg';
 $og_type = 'website';

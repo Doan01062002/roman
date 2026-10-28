@@ -91,8 +91,8 @@ function productSlots(X, p) {
   const cc = X.cat(p.cat), alt = (X.c.photoAlt || {})[p.photos && p.photos[0]] || p.name;
   const related = X.products.filter(x => x.cat === p.cat && x.id !== p.id).slice(0, 4);
   return {
-    crumbs: `<a href="./">Trang chủ</a> / <a href="category.html?cat=${cc.id}">${esc(cc.name)}</a>${p.sub ? ` / ${esc(p.sub)}` : ""} / ${esc(p.name)}`,
-    pd: `${p.photos && p.photos.length ? `<div class="gallery photo"><div class="main"><img src="${photo(p.photos[0])}" alt="${esc(alt)}" width="1200" height="900"></div></div>` : ""}<div class="pd-info"><p class="pd-cat-pill">${esc(cc.name)}${p.sub ? " · " + esc(p.sub) : ""}</p><h1>${esc(p.name)}</h1><p class="lead">${esc(p.short)}</p>
+    crumbs: `<a href="./">Trang chủ</a> / <a href="category.html?cat=${cc.id}">${esc(cc.name)}</a>${p.sub && p.sub !== cc.name && p.sub !== p.name ? ` / ${esc(p.sub)}` : ""} / ${esc(p.name)}`,
+    pd: `${p.photos && p.photos.length ? `<div class="gallery photo"><div class="main"><img src="${photo(p.photos[0])}" alt="${esc(alt)}" width="1200" height="900"></div></div>` : ""}<div class="pd-info"><p class="pd-cat-pill">${esc(cc.name)}${p.sub && p.sub !== cc.name ? " · " + esc(p.sub) : ""}</p><h1>${esc(p.name)}</h1><p class="lead">${esc(p.short)}</p>
 <div class="pd-price-box"><div class="pd-price"><span class="from">${p.price > 0 ? "Giá niêm yết" : "Giá dịch vụ"}</span> <b>${esc(priceText(p))}</b></div></div>
 ${p.prices ? `<h2 class="pd-sec-h">${esc(p.optionLabel)}</h2><ul class="hl">${p.options.map((o, i) => `<li>${esc(o)}: ${money(p.prices[i])}</li>`).join("")}</ul>` : ""}
 <h2 class="pd-sec-h">Đặc điểm nổi bật</h2><ul class="hl">${p.highlights.map(h => `<li>${esc(h)}</li>`).join("")}</ul>
