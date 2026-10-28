@@ -82,7 +82,19 @@ body[data-page="home"] .site-header:not(.scrolled):not(.solid):not(.mega-open):n
 body[data-page="home"] .site-header:not(.scrolled):not(.solid):not(.mega-open):not(.search-open) .logo-img--light { display: block; }
 body[data-page="home"] .site-header:not(.scrolled):not(.solid):not(.mega-open):not(.search-open) .logo-img--dark { display: none; }
 
-/* Menu xổ (mega) */
+/* Menu xổ (mega): bảo đảm #nav và #nav > li ở màn hình máy tính không bị dính transform / position relative làm vỡ độ rộng mega menu */
+@media (min-width: 1181px) {
+  #nav, #nav > li, #nav > li.has-mega {
+    position: static !important;
+    transform: none !important;
+  }
+  .mega {
+    position: absolute !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+  }
+}
 .mega-in { background: var(--lx-ivory); border-top: 1px solid var(--lx-line); padding-top: 34px; padding-bottom: 40px; }
 .mega-grid a { border-radius: 0; padding: 0; background: none; }
 .mega-grid a:hover { background: none; }
@@ -705,7 +717,7 @@ body[data-page="home"] .site-header:not(.scrolled):not(.solid):not(.mega-open):n
 
 /* Đầu trang hiện lần lượt khi mở trang */
 @keyframes m-drop { from { opacity: 0; transform: translateY(-14px); } }
-.js-motion .header-bar .logo, .js-motion #nav > li, .js-motion .header-icons > * { animation: m-drop .9s var(--m-ease) both; animation-delay: var(--hd, 0s); }
+.js-motion .header-bar .logo, .js-motion #nav > li > a, .js-motion .header-icons > * { animation: m-drop .9s var(--m-ease) both; animation-delay: var(--hd, 0s); }
 
 /* Tiêu đề slide đầu trang: chữ trồi lên mỗi lần đổi slide */
 .js-motion .hero-copy .hero-title { clip-path: inset(-.4em -.3em 100% -.3em); transition: opacity .7s ease, transform 1s var(--m-ease), clip-path 1.4s var(--m-ease); }
@@ -741,7 +753,7 @@ body[data-page="home"] .site-header:not(.scrolled):not(.solid):not(.mega-open):n
 }
 @media (prefers-reduced-motion: reduce) {
   .js-motion .hero-copy .hero-title { clip-path: none; }
-  .js-motion .header-bar .logo, .js-motion #nav > li, .js-motion .header-icons > * { animation: none; }
+  .js-motion .header-bar .logo, .js-motion #nav > li > a, .js-motion .header-icons > * { animation: none; }
   .btn-link:hover, .card .card-actions .btn:hover { animation: none; }
 }
 

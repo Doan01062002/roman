@@ -162,7 +162,7 @@ $show_admin_bar = is_user_logged_in();
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap">
-<link rel="stylesheet" href="/css/site.css?v=62">
+<link rel="stylesheet" href="/css/site.css?v=63">
 <!--seo-head-->
 <meta name="generator" content="WordPress <?php echo esc_attr(get_bloginfo('version')); ?> - ROMAN Bespoke Atelier">
 <?php if ($page_type === 'notfound'): ?>
