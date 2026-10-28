@@ -554,9 +554,12 @@ function initHome() {
 
 /* ---------- Trang danh mục / tìm kiếm ---------- */
 function initCategory() {
-  const catId = param("cat"), sub = param("sub"), rawQ = (param("q") || "").trim(), qNorm = norm(rawQ);
+  const catId = param("cat"), rawSub = param("sub"), rawQ = (param("q") || "").trim(), qNorm = norm(rawQ);
   const qTokens = qNorm ? qNorm.split(/\s+/).filter(Boolean) : [];
   const cat = catById(catId);
+  const matchedSub = (cat && rawSub) ? cat.sub.find(s => s === rawSub || norm(s) === norm(rawSub)) : rawSub;
+  const sub = matchedSub || rawSub;
+  const subNorm = norm(sub);
   let sort = "default";
   const title = rawQ ? `Kết quả cho "${rawQ}"` : (sub || (cat ? cat.name : "Tất cả dịch vụ chế tác"));
   document.title = `${title} | ${SITE.name}`;
@@ -574,13 +577,13 @@ function initCategory() {
   }
   subEl.textContent = cat ? cat.desc : `Khám phá trọn bộ ${PRODUCTS.length} gói chế tác và nâng cấp nội thất ô tô thủ công chuẩn form tại ROMAN Bespoke Atelier.`;
   const qChip = rawQ ? `<a class="chip on" id="clearSearchChip" href="category.html" title="Xóa bộ lọc tìm kiếm">Từ khóa: "${esc(rawQ.length > 26 ? rawQ.slice(0, 26) + "…" : rawQ)}" ✕</a>` : "";
-  if (cat) $("#chips").innerHTML = [`<a class="chip ${!sub ? "on" : ""}" href="category.html?cat=${cat.id}">Tất cả ${esc(cat.name)}</a>`, ...cat.sub.map(s => `<a class="chip ${sub === s ? "on" : ""}" href="category.html?cat=${cat.id}&sub=${encodeURIComponent(s)}">${esc(s)}</a>`)].join("");
+  if (cat) $("#chips").innerHTML = [`<a class="chip ${!sub ? "on" : ""}" href="category.html?cat=${cat.id}">Tất cả ${esc(cat.name)}</a>`, ...cat.sub.map(s => `<a class="chip ${norm(s) === subNorm ? "on" : ""}" href="category.html?cat=${cat.id}&sub=${encodeURIComponent(s)}">${esc(s)}</a>`)].join("");
   else $("#chips").innerHTML = [qChip, `<a class="chip ${!rawQ ? "on" : ""}" href="category.html">Tất cả (${PRODUCTS.length})</a>`, ...CATEGORIES.map(c => `<a class="chip" href="category.html?cat=${c.id}">${esc(c.name)}</a>`)].filter(Boolean).join("");
 
   const draw = () => {
     let list = PRODUCTS.filter(p => {
       if (cat && p.cat !== cat.id) return false;
-      if (sub && p.sub !== sub) return false;
+      if (sub && norm(p.sub) !== subNorm) return false;
       if (!qTokens.length) return true;
       const hay = norm([p.name, p.nick, p.short, p.sub, catById(p.cat)?.name, ...p.colors.map(c => c[0]), ...p.highlights].join(" "));
       return qTokens.every(t => hay.includes(t));

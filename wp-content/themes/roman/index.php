@@ -147,15 +147,13 @@ $show_admin_bar = is_user_logged_in();
 ?><!doctype html>
 <html lang="vi">
 <head>
-<?php if ($need_base || $show_admin_bar): ?>
 <base href="<?php echo esc_url(home_url('/')); ?>">
-<?php endif; ?>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title><?php echo esc_html($title); ?></title>
 <meta name="description" content="<?php echo esc_attr($desc); ?>">
-<link rel="icon" type="image/svg+xml" href="assets/logo-badge.svg">
-<link rel="apple-touch-icon" href="assets/logo-emblem.png">
+<link rel="icon" type="image/svg+xml" href="/assets/logo-badge.svg">
+<link rel="apple-touch-icon" href="/assets/logo-emblem.png">
 <meta name="theme-color" content="#f7f5f2">
 <meta property="og:site_name" content="<?php echo esc_attr($site_name); ?>">
 <meta property="og:locale" content="vi_VN">
@@ -164,7 +162,7 @@ $show_admin_bar = is_user_logged_in();
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap">
-<link rel="stylesheet" href="css/site.css?v=62">
+<link rel="stylesheet" href="/css/site.css?v=62">
 <!--seo-head-->
 <meta name="generator" content="WordPress <?php echo esc_attr(get_bloginfo('version')); ?> - ROMAN Bespoke Atelier">
 <?php if ($page_type === 'notfound'): ?>
@@ -408,11 +406,11 @@ $show_admin_bar = is_user_logged_in();
 <?php endif; ?>
 
 <div id="footer"></div>
-<script src="js/data.js?v=d<?php echo esc_attr($rev); ?>"></script>
-<script src="js/art.js?v=29"></script>
-<script src="js/app.js?v=52"></script>
+<script src="/js/data.js?v=d<?php echo esc_attr($rev); ?>"></script>
+<script src="/js/art.js?v=29"></script>
+<script src="/js/app.js?v=53"></script>
 <?php if ($page_type === 'home'): ?>
-<script src="js/finder.js?v=4"></script>
+<script src="/js/finder.js?v=4"></script>
 <?php endif; ?>
 </body>
 </html>

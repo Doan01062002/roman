@@ -27,6 +27,25 @@ add_filter('pre_handle_404', function ($preempt, $wp_query) {
     return $preempt;
 }, 10, 2);
 
+/* Ngăn WordPress canonical redirect tự động thêm trailing slash vào các URL .html */
+add_filter('redirect_canonical', function ($redirect_url, $requested_url) {
+    $path = parse_url($requested_url, PHP_URL_PATH);
+    if (preg_match('#\.[a-zA-Z0-9]+/?$#', $path)) {
+        return false;
+    }
+    return $redirect_url;
+}, 10, 2);
+
+/* Nếu URL bị dính dấu gạch chéo ở đuôi .html/ (do cache cũ), chuyển hướng chuẩn về .html */
+add_action('template_redirect', function () {
+    $uri = parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH);
+    if (preg_match('#^/(.+\.html)/+$#i', $uri, $m)) {
+        $query = !empty($_SERVER['QUERY_STRING']) ? ('?' . $_SERVER['QUERY_STRING']) : '';
+        wp_redirect(home_url('/' . $m[1] . $query), 301);
+        exit;
+    }
+}, 1);
+
 /* ---------- 2. Tiện ích đọc / ghi dữ liệu gốc (site.json & Option) ---------- */
 function roman_site_json_path() {
     return ABSPATH . 'content/site.json';
