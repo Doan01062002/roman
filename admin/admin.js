@@ -1241,7 +1241,7 @@ VIEWS.site = v => {
       h("div", { class: "grid2" }, tf(s, "store", "Địa chỉ cửa hàng"), tf(s, "warehouse", "Địa chỉ tổng kho")),
       tf(s, "hours", "Giờ mở cửa", { ph: "VD: 8:00 – 18:00, Thứ 2 – Chủ nhật", hint: "Để trống thì không hiển thị" })),
     section("Thông tin pháp lý", "Hiển thị ở chân trang khi có", h("div", { class: "grid2" }, tf(s, "legalName", "Tên công ty / hộ kinh doanh", { ph: "VD: Công ty TNHH ..." }), tf(s, "taxCode", "Mã số thuế"))),
-    section("Mạng xã hội", "Chỉ hiện ở chân trang những mục có liên kết", S.c.social.map(x => tf(x, "url", x.name, { type: "url", ph: x.name === "Zalo" ? "https://zalo.me/0927098098" : `https://www.${x.name.toLowerCase()}.com/...` }))),
+    section("Mạng xã hội", "Chỉ hiện ở chân trang những mục có liên kết", S.c.social.map(x => tf(x, "url", x.name, { type: "url", ph: x.name === "Zalo" ? "https://zalo.me/0964486246" : `https://www.${x.name.toLowerCase()}.com/...` }))),
     section("Nhận lịch hẹn", null,
       tf(s, "formEndpoint", "Địa chỉ nhận form đặt lịch", { mono: true, hint: "Mặc định /api/bookings: lịch hẹn về mục Lịch hẹn trong trang quản trị. Để trống: nút gửi sẽ mở email của khách với nội dung có sẵn." }),
       h("div", { class: "note" }, "Nếu đưa website lên hosting tĩnh (không chạy máy chủ Node), form sẽ tự chuyển sang gửi qua email.")));

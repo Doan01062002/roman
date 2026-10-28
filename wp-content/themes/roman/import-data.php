@@ -97,7 +97,7 @@ foreach (($data['stories'] ?? []) as $idx => $st) {
         'post_title'   => $st['title'],
         'post_name'    => roman_slugify($st['title']),
         'post_excerpt' => $st['desc'] ?? '',
-        'post_content' => '<p>' . esc_html($st['desc'] ?? '') . '</p><p>Liên hệ ngay với xưởng chế tác <strong>ROMAN Bespoke Atelier</strong> qua hotline <strong>' . esc_html($data['site']['hotline'] ?? '0927 098 098') . '</strong> để được tư vấn trực tiếp và trải nghiệm mẫu da thực tế cho dòng xe của bạn.</p>',
+        'post_content' => '<p>' . esc_html($st['desc'] ?? '') . '</p><p>Liên hệ ngay với xưởng chế tác <strong>ROMAN Bespoke Atelier</strong> qua hotline <strong>' . esc_html($data['site']['hotline'] ?? '0964 486 246') . '</strong> để được tư vấn trực tiếp và trải nghiệm mẫu da thực tế cho dòng xe của bạn.</p>',
         'menu_order'   => $idx + 1,
     ]);
     if ($post_id && !is_wp_error($post_id)) {

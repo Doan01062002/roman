@@ -1147,7 +1147,7 @@ function roman_render_settings_page() {
             if (!empty($_POST['send_test_tg'])) {
                 roman_send_telegram_booking([
                     'name'  => 'Khách hàng thử nghiệm',
-                    'phone' => '0927 098 098',
+                    'phone' => '0964 486 246',
                     'car'   => 'Mercedes-Maybach S450',
                     'date'  => current_time('Y-m-d'),
                     'topic' => 'Bọc ghế da Nappa & Trần sao',

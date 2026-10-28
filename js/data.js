@@ -1,12 +1,12 @@
 /* TỆP TỰ SINH từ content/site.json bởi trang quản trị (/admin). Đừng sửa tay: mọi thay đổi sẽ bị ghi đè khi lưu.
-   Phiên bản nội dung: 14 */
+   Phiên bản nội dung: 16 */
 const SITE = {
  "name": "ROMAN",
  "tagline": "Xưởng Chế Tác & Cá Nhân Hóa Nội Thất Ô Tô Cao Cấp",
  "logo": "assets/logo.svg",
  "badge": "assets/logo-badge.svg",
- "hotline": "0927 098 098",
- "hotline2": "0926 098 098",
+ "hotline": "0964 486 246",
+ "hotline2": "",
  "email": "Vinaleather102@gmail.com",
  "store": "763 Nguyễn Văn Linh, Long Biên, Hà Nội",
  "warehouse": "Số 40 Vũ Xuân Thiều, Long Biên, Hà Nội",
@@ -139,7 +139,7 @@ const PRODUCTS = [
    "Đơn vị tính": "Bộ",
    "Giá niêm yết": "Xe 5 chỗ: 5.500.000₫ · Xe 7 chỗ: 7.500.000₫",
    "Đặt hàng": "Xem mẫu, chọn màu và đặt lịch tại cửa hàng ROMAN hoặc qua hotline",
-   "Liên hệ": "0927 098 098 · 0926 098 098"
+   "Liên hệ": "0964 486 246"
   },
   "price": 5500000,
   "old": 0,
@@ -198,7 +198,7 @@ const PRODUCTS = [
    "Đơn vị tính": "Bộ",
    "Giá niêm yết": "Xe 5 chỗ: 7.500.000₫ · Xe 7 chỗ: 9.500.000₫",
    "Đặt hàng": "Xem mẫu, chọn màu và đặt lịch tại cửa hàng ROMAN hoặc qua hotline",
-   "Liên hệ": "0927 098 098 · 0926 098 098"
+   "Liên hệ": "0964 486 246"
   },
   "price": 7500000,
   "old": 0,
@@ -259,7 +259,7 @@ const PRODUCTS = [
    "Đơn vị tính": "Bộ",
    "Giá niêm yết": "Xe 5 chỗ: 9.500.000₫ · Xe 7 chỗ: 11.500.000₫",
    "Đặt hàng": "Xem mẫu, chọn màu và đặt lịch tại cửa hàng ROMAN hoặc qua hotline",
-   "Liên hệ": "0927 098 098 · 0926 098 098"
+   "Liên hệ": "0964 486 246"
   },
   "price": 9500000,
   "old": 0,
@@ -319,7 +319,7 @@ const PRODUCTS = [
    "Đơn vị tính": "Bộ",
    "Giá niêm yết": "Xe 5 chỗ: 5.500.000₫ · Xe 7 chỗ: 7.500.000₫",
    "Đặt hàng": "Xem mẫu, chọn màu và đặt lịch tại cửa hàng ROMAN hoặc qua hotline",
-   "Liên hệ": "0927 098 098 · 0926 098 098"
+   "Liên hệ": "0964 486 246"
   },
   "price": 5500000,
   "old": 0,
@@ -369,7 +369,7 @@ const PRODUCTS = [
    "Đơn vị tính": "Bộ",
    "Giá niêm yết": "Ghế phụ · VF3: 6.500.000₫ · Ghế phụ · VF2 / Minio Green: 6.500.000₫ · Ghế lái · VF3: 6.500.000₫ · Ghế lái · VF2 / Minio Green: 6.500.000₫",
    "Đặt hàng": "Xem mẫu, chọn màu và đặt lịch tại cửa hàng ROMAN hoặc qua hotline",
-   "Liên hệ": "0927 098 098 · 0926 098 098"
+   "Liên hệ": "0964 486 246"
   },
   "price": 6500000,
   "old": 0,
@@ -652,7 +652,7 @@ const PRODUCTS = [
    "Đơn vị tính": "Bộ",
    "Giá niêm yết": "Xe VF2 / VF3: 1.980.000₫ · Xe 5 chỗ: 2.000.000₫ · Xe 7 chỗ: 2.500.000₫",
    "Đặt hàng": "Xem mẫu, chọn màu và đặt lịch tại cửa hàng ROMAN hoặc qua hotline",
-   "Liên hệ": "0927 098 098 · 0926 098 098"
+   "Liên hệ": "0964 486 246"
   },
   "price": 1980000,
   "old": 0,
@@ -710,7 +710,7 @@ const PRODUCTS = [
    "Đơn vị tính": "Bộ",
    "Giá niêm yết": "Xe VF2 / VF3: 2.950.000₫ · Xe 5 chỗ: 3.000.000₫ · Xe 7 chỗ: 4.000.000₫",
    "Đặt hàng": "Xem mẫu, chọn màu và đặt lịch tại cửa hàng ROMAN hoặc qua hotline",
-   "Liên hệ": "0927 098 098 · 0926 098 098"
+   "Liên hệ": "0964 486 246"
   },
   "price": 2950000,
   "old": 0,
@@ -769,7 +769,7 @@ const PRODUCTS = [
    "Đơn vị tính": "Bộ",
    "Giá niêm yết": "Xe VF2 / VF3: 3.450.000₫ · Xe 5 chỗ: 3.500.000₫ · Xe 7 chỗ: 4.500.000₫",
    "Đặt hàng": "Xem mẫu, chọn màu và đặt lịch tại cửa hàng ROMAN hoặc qua hotline",
-   "Liên hệ": "0927 098 098 · 0926 098 098"
+   "Liên hệ": "0964 486 246"
   },
   "price": 3450000,
   "old": 0,
@@ -826,7 +826,7 @@ const PRODUCTS = [
    "Đơn vị tính": "Bộ",
    "Giá niêm yết": "Xe VF2 / VF3: 1.000.000₫ · Xe 5 chỗ: 1.000.000₫ · Xe 7 chỗ: 1.500.000₫",
    "Đặt hàng": "Xem mẫu, chọn màu và đặt lịch tại cửa hàng ROMAN hoặc qua hotline",
-   "Liên hệ": "0927 098 098 · 0926 098 098"
+   "Liên hệ": "0964 486 246"
   },
   "price": 1000000,
   "old": 0,
@@ -880,7 +880,7 @@ const PRODUCTS = [
    "Đơn vị tính": "Bộ",
    "Giá niêm yết": "Xe VF2 / VF3: 1.800.000₫ · Xe 5 chỗ: 1.800.000₫ · Xe 7 chỗ: 2.400.000₫",
    "Đặt hàng": "Xem mẫu, chọn màu và đặt lịch tại cửa hàng ROMAN hoặc qua hotline",
-   "Liên hệ": "0927 098 098 · 0926 098 098"
+   "Liên hệ": "0964 486 246"
   },
   "price": 1800000,
   "old": 0,
@@ -934,7 +934,7 @@ const PRODUCTS = [
    "Đơn vị tính": "Bộ",
    "Giá niêm yết": "Xe VF2 / VF3: 2.500.000₫ · Xe 5 chỗ: 2.500.000₫ · Xe 7 chỗ: 3.000.000₫",
    "Đặt hàng": "Xem mẫu, chọn màu và đặt lịch tại cửa hàng ROMAN hoặc qua hotline",
-   "Liên hệ": "0927 098 098 · 0926 098 098"
+   "Liên hệ": "0964 486 246"
   },
   "price": 2500000,
   "old": 0,
@@ -1271,7 +1271,7 @@ const PRODUCTS = [
    "Đơn vị tính": "Mét",
    "Giá niêm yết": "Tính theo mét: 1.800.000₫",
    "Đặt hàng": "Xem mẫu, chọn màu và đặt lịch tại cửa hàng ROMAN hoặc qua hotline",
-   "Liên hệ": "0927 098 098 · 0926 098 098"
+   "Liên hệ": "0964 486 246"
   },
   "price": 1800000,
   "old": 0,
@@ -1794,7 +1794,7 @@ const SOCIAL = [
  },
  {
   "name": "Zalo",
-  "url": ""
+  "url": "https://zalo.me/0964486246"
  }
 ];
 const PHOTO_ALT = {
@@ -1889,7 +1889,7 @@ const PAGES = {
   "lead": "Ghế da ROMAN (Sumi Fiber, Nappa Fiber, Nappa Fiber Pro, Nappa Clear), ghế điện, sàn ROMAN 360, thảm ROMAN và trần sao, niêm yết giá theo từng dòng xe.",
   "heroEyebrow": "CỬA HÀNG & TỔNG KHO TẠI HÀ NỘI",
   "heroTitle": "Mỗi Khoang Lái Là Một Tác Phẩm Độc Bản",
-  "heroBody": "**ROMAN** chuyên bọc ghế da, ghế điện, sàn, thảm và trần sao cho ô tô, với bảng giá niêm yết rõ ràng theo từng dòng xe: VF2/VF3, xe 5 chỗ và xe 7 chỗ.\n\nCửa hàng ở {store} và tổng kho ở {warehouse}. Bạn có thể đến xem mẫu da, chọn màu trực tiếp hoặc gọi hotline để được tư vấn trước.",
+  "heroBody": "**ROMAN (Công Roman Car Interior)** chuyên bọc ghế da, ghế điện, thảm sàn 360, và trần sao cho mọi dòng xe.\n\nPhương châm: **Làm thật – Nói thật – bảo hành thật. Xe đẹp hơn, ví vẫn phải hợp lý.**\n\nNhận tư vấn cá nhân hóa và hợp tác đại lý trên toàn quốc.\n\nCửa hàng ở {store} và tổng kho ở {warehouse}. Bạn có thể đến xem mẫu da, chọn màu trực tiếp hoặc gọi hotline [{hotline}](tel:{hotlineTel}) để được tư vấn trước.",
   "heroImage": "xuong-01",
   "stats": [
    {
@@ -2033,8 +2033,8 @@ const PAGES = {
     "Khác"
    ],
    "sideEyebrow": "GẶP TRỰC TIẾP TẠI ROMAN",
-   "sideTitle": "Cửa Hàng & Tổng Kho",
-   "sideBody": "Ghé cửa hàng để xem mẫu da và chọn màu trực tiếp. Nên gọi hotline trước khi đến."
+   "sideTitle": "Cửa Hàng & Tổng Kho ROMAN",
+   "sideBody": "**Công Roman Car Interior**\n\n- Chuyên thảm sàn & ghế da ô tô Roman\n- Làm thật – Nói thật – bảo hành thật\n- Xe đẹp hơn, ví vẫn phải hợp lý 😄\n\n📩 Nhận tư vấn & hợp tác đại lý toàn quốc.\nHotline / Zalo: [{hotline}](tel:{hotlineTel})."
   }
  },
  "policy": {
@@ -2046,7 +2046,7 @@ const PAGES = {
    {
     "id": "bao-hanh",
     "title": "Chính sách bảo hành",
-    "body": "Thời hạn và phạm vi bảo hành phụ thuộc vào từng hạng mục (ghế da, ghế điện, sàn, thảm, trần sao...) và chất liệu đã chọn. ROMAN xác nhận cụ thể với khách hàng khi đặt lịch hoặc bàn giao xe.\n\n### Quy trình bảo hành\n\n1. Liên hệ hotline [{hotline}](tel:{hotlineTel}) hoặc [{hotline2}](tel:{hotline2Tel}) và cho biết họ tên, số điện thoại, dòng xe, hạng mục đã thực hiện.\n2. Mang xe đến cửa hàng ROMAN tại {store} để nhân viên kiểm tra tình trạng thực tế.\n3. ROMAN thông báo kết quả kiểm tra và hướng xử lý (sửa chữa, thay thế hoặc tư vấn bảo dưỡng) tùy từng trường hợp.\n\n### Các trường hợp thường không thuộc phạm vi bảo hành\n\n- Hư hỏng do va chạm, tai nạn, cháy nổ hoặc thiên tai.\n- Sử dụng sai cách, vệ sinh bằng hóa chất không phù hợp với chất liệu.\n- Tự ý tháo, sửa hoặc can thiệp vào sản phẩm bởi đơn vị khác.\n- Hao mòn tự nhiên theo thời gian và cường độ sử dụng.\n\nĐể biết thời hạn bảo hành chính xác của hạng mục bạn quan tâm, vui lòng liên hệ hotline."
+    "body": "Thời hạn và phạm vi bảo hành phụ thuộc vào từng hạng mục (ghế da, ghế điện, sàn, thảm, trần sao...) và chất liệu đã chọn. ROMAN xác nhận cụ thể với khách hàng khi đặt lịch hoặc bàn giao xe.\n\n### Quy trình bảo hành\n\n1. Liên hệ hotline [{hotline}](tel:{hotlineTel})  và cho biết họ tên, số điện thoại, dòng xe, hạng mục đã thực hiện.\n2. Mang xe đến cửa hàng ROMAN tại {store} để nhân viên kiểm tra tình trạng thực tế.\n3. ROMAN thông báo kết quả kiểm tra và hướng xử lý (sửa chữa, thay thế hoặc tư vấn bảo dưỡng) tùy từng trường hợp.\n\n### Các trường hợp thường không thuộc phạm vi bảo hành\n\n- Hư hỏng do va chạm, tai nạn, cháy nổ hoặc thiên tai.\n- Sử dụng sai cách, vệ sinh bằng hóa chất không phù hợp với chất liệu.\n- Tự ý tháo, sửa hoặc can thiệp vào sản phẩm bởi đơn vị khác.\n- Hao mòn tự nhiên theo thời gian và cường độ sử dụng.\n\nĐể biết thời hạn bảo hành chính xác của hạng mục bạn quan tâm, vui lòng liên hệ hotline."
    },
    {
     "id": "bao-mat",
@@ -2056,7 +2056,7 @@ const PAGES = {
    {
     "id": "dieu-khoan",
     "title": "Điều khoản sử dụng website",
-    "body": "- **Mục đích:** website giới thiệu sản phẩm, dịch vụ và bảng giá của ROMAN. Website không phải kênh thanh toán trực tuyến.\n- **Giá niêm yết:** giá hiển thị là giá niêm yết theo bảng giá của ROMAN, có thể thay đổi theo dòng xe, cấu hình và thời điểm. Giá chính xác được xác nhận khi liên hệ.\n- **Hình ảnh và mô tả:** mang tính minh họa, màu sắc thực tế có thể chênh lệch tùy màn hình và chất liệu.\n- **Quyền sở hữu nội dung:** nội dung, hình ảnh và thương hiệu trên website thuộc ROMAN hoặc bên cấp phép. Không sao chép, sử dụng cho mục đích thương mại khi chưa được đồng ý bằng văn bản.\n- **Thay đổi:** ROMAN có thể cập nhật nội dung website và các điều khoản này mà không cần báo trước.\n\nMọi thắc mắc xin liên hệ hotline [{hotline}](tel:{hotlineTel}) – [{hotline2}](tel:{hotline2Tel}) hoặc email [{email}](mailto:{email})."
+    "body": "- **Mục đích:** website giới thiệu sản phẩm, dịch vụ và bảng giá của ROMAN. Website không phải kênh thanh toán trực tuyến.\n- **Giá niêm yết:** giá hiển thị là giá niêm yết theo bảng giá của ROMAN, có thể thay đổi theo dòng xe, cấu hình và thời điểm. Giá chính xác được xác nhận khi liên hệ.\n- **Hình ảnh và mô tả:** mang tính minh họa, màu sắc thực tế có thể chênh lệch tùy màn hình và chất liệu.\n- **Quyền sở hữu nội dung:** nội dung, hình ảnh và thương hiệu trên website thuộc ROMAN hoặc bên cấp phép. Không sao chép, sử dụng cho mục đích thương mại khi chưa được đồng ý bằng văn bản.\n- **Thay đổi:** ROMAN có thể cập nhật nội dung website và các điều khoản này mà không cần báo trước.\n\nMọi thắc mắc xin liên hệ hotline [{hotline}](tel:{hotlineTel})  hoặc email [{email}](mailto:{email})."
    }
   ]
  }

@@ -184,7 +184,7 @@ $show_admin_bar = is_user_logged_in();
     'url'         => '/',
     'image'       => '/assets/photos/xuong-01-xl.jpg',
     'logo'        => '/assets/logo-emblem.png',
-    'telephone'   => $site['hotline'] ?? '0927 098 098',
+    'telephone'   => $site['hotline'] ?? '0964 486 246',
     'email'       => $site['email'] ?? '',
     'address'     => [
         '@type'           => 'PostalAddress',
@@ -399,7 +399,7 @@ $show_admin_bar = is_user_logged_in();
     <div class="nf-actions">
       <a class="btn btn-dark" href="index.html">Về trang chủ</a>
       <a class="btn btn-outline" href="category.html">Xem bảng giá niêm yết</a>
-      <a class="btn btn-outline" href="tel:0927098098">Gọi 0927 098 098</a>
+      <a class="btn btn-outline" href="tel:0964486246">Gọi 0964 486 246</a>
     </div>
   </div>
 </main>
@@ -408,7 +408,7 @@ $show_admin_bar = is_user_logged_in();
 <div id="footer"></div>
 <script src="/js/data.js?v=d<?php echo esc_attr($rev); ?>"></script>
 <script src="/js/art.js?v=29"></script>
-<script src="/js/app.js?v=54"></script>
+<script src="/js/app.js?v=55"></script>
 <?php if ($page_type === 'home'): ?>
 <script src="/js/finder.js?v=4"></script>
 <?php endif; ?>

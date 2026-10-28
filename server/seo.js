@@ -66,7 +66,7 @@ function slotsFor(X, file) {
     return { pageSupport: `<div class="page-head"><p class="sec-eyebrow">${esc(fill(S.eyebrow))}</p><h1>${esc(fill(S.title))}</h1><p class="cat-lead">${esc(fill(S.lead))}</p></div>
 <div class="support-grid">${S.cards.map(x => `<div class="support-card"><h2 class="card-h">${esc(fill(x.title))}</h2>${md(x.body)}</div>`).join("")}</div>
 <section class="block faq" id="faq"><h2 class="section-title">${esc(fill(S.faq.title))}</h2>${S.faq.items.map(f => `<details><summary>${esc(fill(f.q))}</summary>${md(f.a)}</details>`).join("")}</section>
-<section class="block" id="lien-he"><h2 class="section-title">${esc(fill(B.title))}</h2><p class="section-sub">${esc(fill(B.sub))}</p><ul class="booking-perks"><li>Cửa hàng: ${esc(site.store)}</li><li>Tổng kho: ${esc(site.warehouse)}</li>${site.hours ? `<li>Giờ mở cửa: ${esc(site.hours)}</li>` : ""}<li>Hotline: <a href="tel:${telOf(site.hotline)}">${esc(site.hotline)}</a> – <a href="tel:${telOf(site.hotline2)}">${esc(site.hotline2)}</a></li><li>Email: <a href="mailto:${esc(site.email)}">${esc(site.email)}</a></li></ul></section>` };
+<section class="block" id="lien-he"><h2 class="section-title">${esc(fill(B.title))}</h2><p class="section-sub">${esc(fill(B.sub))}</p><ul class="booking-perks"><li>Cửa hàng: ${esc(site.store)}</li><li>Tổng kho: ${esc(site.warehouse)}</li>${site.hours ? `<li>Giờ mở cửa: ${esc(site.hours)}</li>` : ""}<li>Hotline: <a href="tel:${telOf(site.hotline)}">${esc(site.hotline)}</a>${site.hotline2 ? ` – <a href="tel:${telOf(site.hotline2)}">${esc(site.hotline2)}</a>` : ""}</li>${site.email ? `<li>Email: <a href="mailto:${esc(site.email)}">${esc(site.email)}</a></li>` : ""}</ul></section>` };
   }
   if (file === "about.html") {
     const A = c.pages.about;
@@ -74,7 +74,7 @@ function slotsFor(X, file) {
 <section class="about-hero"><div class="about-hero-copy"><h2>${esc(fill(A.heroTitle))}</h2>${md(A.heroBody)}</div></section>
 <section class="stats-strip">${A.stats.map(x => `<div class="stat-card"><b>${esc(fill(x.value))}</b> <span>${esc(fill(x.label))}</span></div>`).join("")}</section>
 <section class="block" id="quy-trinh"><h2 class="section-title">${esc(fill(A.process.title))}</h2>${A.process.steps.map((x, i) => `<article class="process-card"><h3>Bước ${i + 1}: ${esc(fill(x.title))}</h3>${md(x.body)}</article>`).join("")}</section>
-<section class="block" id="cua-hang"><h2 class="section-title">${esc(fill(A.stores.title))}</h2><p>${esc(A.stores.storeName)}: ${esc(site.store)}</p><p>${esc(A.stores.warehouseName)}: ${esc(site.warehouse)}</p><p>Hotline: ${esc(site.hotline)} – ${esc(site.hotline2)}</p></section>
+<section class="block" id="cua-hang"><h2 class="section-title">${esc(fill(A.stores.title))}</h2><p>${esc(A.stores.storeName)}: ${esc(site.store)}</p><p>${esc(A.stores.warehouseName)}: ${esc(site.warehouse)}</p><p>Hotline: ${esc(site.hotline)}${site.hotline2 ? ` – ${esc(site.hotline2)}` : ""}</p></section>
 ${A.jobs.items.length ? `<section class="block" id="tuyen-dung"><h2 class="section-title">${esc(fill(A.jobs.title))}</h2>${A.jobs.items.map(j => `<article class="support-card"><h3 class="card-h">${esc(fill(j.title))}</h3>${md(j.body)}</article>`).join("")}</section>` : ""}` };
   }
   if (file === "chinh-sach.html") {

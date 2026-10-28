@@ -205,7 +205,15 @@ function renderFooter() {
     ["Sản Phẩm & Dịch Vụ", [...CATEGORIES.map(c => `<a href="category.html?cat=${c.id}">${esc(c.name)}</a>`), `<a href="category.html?cat=ghe-da&sub=${encodeURIComponent("Ghế Limousine")}">Ghế chủ tịch Limousine</a>`]],
     ["Chất Liệu & Hạng Mục", [["Ghế Chủ Tịch Limousine", "limo-hermes"], ["Ghế Limousine Maybach", "limo-maybach"], ["Ghế da Sumi Fiber", "ghe-cong-nghiep"], ["Ghế da Nappa Fiber", "ghe-nappa-6d"], ["Ghế da Nappa Fiber Pro", "ghe-da-bo-y"], ["Ghế da Nappa Clear", "ghe-nappa-clear"], ["Ghế điện", "ghe-dien"], ["Sàn ROMAN 360 Premium", "san-6d"], ["Thảm ROMAN Signature", "tham-san-duc"], ["Trần sao Starlight", "tran-sao"], ["Trần da lộn", "tran-da-lon"]].map(([n, id]) => { const p = PRODUCTS.find(x => x.id === id); return p ? `<a href="${pUrl(p)}">${n}</a>` : ""; }).filter(Boolean)],
     ["Mua Sắm & Đặt Lịch", ['<a href="category.html">Bảng giá niêm yết</a>', '<a href="support.html#lien-he">Đặt lịch thi công tại xưởng</a>', '<a href="support.html?dv=limo-hermes#lien-he">Đặt chế tác ghế Limousine</a>', '<a href="about.html#cua-hang">Trực tiếp xem mẫu da</a>', '<a href="about.html#cua-hang">Cửa hàng &amp; tổng kho</a>']],
-    ["Hỗ Trợ", ['<a href="support.html">Trung tâm hỗ trợ</a>', '<a href="support.html#faq">Câu hỏi thường gặp</a>', '<a href="chinh-sach.html#bao-hanh">Chính sách bảo hành</a>', `<a href="tel:${tel}">Hotline: ${esc(SITE.hotline)}</a>`, `<a href="tel:${esc(SITE.hotline2.replace(/\s/g, ""))}">Hotline: ${esc(SITE.hotline2)}</a>`, `<a href="mailto:${esc(SITE.email)}">Email hỗ trợ${ext}</a>`]],
+    ["Hỗ Trợ", [
+      '<a href="support.html">Trung tâm hỗ trợ</a>',
+      '<a href="support.html#faq">Câu hỏi thường gặp</a>',
+      '<a href="chinh-sach.html#bao-hanh">Chính sách bảo hành</a>',
+      `<a href="tel:${tel}">Hotline: ${esc(SITE.hotline)}</a>`,
+      ...(SITE.hotline2 ? [`<a href="tel:${esc(SITE.hotline2.replace(/\s/g, ""))}">Hotline 2: ${esc(SITE.hotline2)}</a>`] : []),
+      ...((SOCIAL.find(s => s.name === "Zalo")?.url) ? [`<a href="${esc(SOCIAL.find(s => s.name === "Zalo").url)}" target="_blank" rel="noopener">Zalo: ${esc(SITE.hotline)}</a>`] : []),
+      `<a href="mailto:${esc(SITE.email)}">Email hỗ trợ${ext}</a>`
+    ]],
     ["Giới Thiệu", ['<a href="about.html">Câu chuyện thương hiệu</a>', '<a href="about.html#quy-trinh">Quy trình chế tác</a>', '<a href="about.html#cua-hang">Cửa hàng &amp; tổng kho</a>', ...(PAGES.about.jobs.items.length ? ['<a href="about.html#tuyen-dung">Tuyển dụng</a>'] : [])]],
   ];
   const badgeHtml = SITE.badge ? `<img class="foot-badge" src="${esc(SITE.badge)}" alt="${esc(SITE.name)}" width="52" height="52">` : "";
@@ -216,7 +224,7 @@ function renderFooter() {
     </div></section>
     <div class="foot-in">
     <div class="foot-grid">${cols.map(([t, l]) => `<div class="foot-col"><h2 class="foot-h">${t}</h2><ul>${l.map(x => `<li>${x}</li>`).join("")}</ul></div>`).join("")}</div>
-    <div class="foot-info">${badgeHtml}<p>Bản quyền ©${new Date().getFullYear()} ${esc(SITE.name)} bảo lưu mọi quyền.<br>${SITE.legalName ? `${esc(SITE.legalName)}${SITE.taxCode ? ` · MST: ${esc(SITE.taxCode)}` : ""}<br>` : ""}Cửa hàng: ${esc(SITE.store)}<br>Tổng kho: ${esc(SITE.warehouse)}<br>${SITE.hours ? `Giờ mở cửa: ${esc(SITE.hours)}<br>` : ""}Hotline: <b>${esc(SITE.hotline)}</b> – <b>${esc(SITE.hotline2)}</b> · Email: ${esc(SITE.email)}</p></div>
+    <div class="foot-info">${badgeHtml}<p>Bản quyền ©${new Date().getFullYear()} ${esc(SITE.name)} bảo lưu mọi quyền.<br>${SITE.legalName ? `${esc(SITE.legalName)}${SITE.taxCode ? ` · MST: ${esc(SITE.taxCode)}` : ""}<br>` : ""}Cửa hàng: ${esc(SITE.store)}<br>Tổng kho: ${esc(SITE.warehouse)}<br>${SITE.hours ? `Giờ mở cửa: ${esc(SITE.hours)}<br>` : ""}Hotline: <b>${esc(SITE.hotline)}</b>${SITE.hotline2 ? ` – <b>${esc(SITE.hotline2)}</b>` : ""}${SITE.email ? ` · Email: ${esc(SITE.email)}` : ""}</p></div>
     <div class="foot-bottom"><div class="foot-legal"><b>Việt Nam/Tiếng Việt</b><a href="chinh-sach.html#dieu-khoan">Điều khoản sử dụng</a><a href="chinh-sach.html#bao-mat">Bảo mật</a><a href="so-do-trang.html">Sơ đồ trang</a></div>
       <div class="foot-social"${SOCIAL.some(x => x.url) ? "" : " hidden"}><span>Kết nối với Chúng tôi</span>${SOCIAL.filter(x => x.url).map(x => `<a href="${esc(x.url)}" aria-label="${esc(x.name)}" target="_blank" rel="noopener"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">${SOCIAL_ICONS[x.name] || ""}</svg></a>`).join("")}</div></div>
   </div></footer>
