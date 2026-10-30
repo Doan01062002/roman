@@ -112,10 +112,11 @@ function businessLd(X) {
   const o = {
     "@context": "https://schema.org", "@type": "AutoRepair", "@id": X.abs("#cua-hang"),
     name: site.name, description: site.tagline, url: X.abs(""), image: X.abs(photo("xuong-01", "xl")), logo: X.abs("assets/logo-emblem.png"),
-    telephone: site.hotline, email: site.email, address: addressLd(site), priceRange: "₫₫",
+    telephone: site.hotline, address: addressLd(site), priceRange: "₫₫",
     areaServed: [{ "@type": "City", name: "Hà Nội" }, { "@type": "City", name: "TP. Hồ Chí Minh" }],
     contactPoint: [site.hotline, site.hotline2].filter(Boolean).map(t => ({ "@type": "ContactPoint", telephone: t, contactType: "customer service", availableLanguage: "vi" })),
   };
+  if (site.email) o.email = site.email;
   if (site.legalName) o.legalName = site.legalName;
   if (site.taxCode) o.taxID = site.taxCode;
   const same = (c.social || []).map(s => s.url).filter(Boolean);

@@ -1,5 +1,5 @@
 /* TỆP TỰ SINH từ content/site.json bởi trang quản trị (/admin). Đừng sửa tay: mọi thay đổi sẽ bị ghi đè khi lưu.
-   Phiên bản nội dung: 17 */
+   Phiên bản nội dung: 18 */
 const SITE = {
  "name": "ROMAN",
  "tagline": "Xưởng Chế Tác & Cá Nhân Hóa Nội Thất Ô Tô Cao Cấp",
@@ -7,7 +7,7 @@ const SITE = {
  "badge": "assets/logo-badge.svg",
  "hotline": "0964 486 246",
  "hotline2": "",
- "email": "Vinaleather102@gmail.com",
+ "email": "",
  "store": "170 Sài Đồng, Long Biên, Hà Nội",
  "warehouse": "40 Tô Nguyệt Đình, Tân Thành, TP. Hồ Chí Minh",
  "formEndpoint": "/api/bookings",
@@ -1889,7 +1889,7 @@ const PAGES = {
   "lead": "Ghế da ROMAN (Sumi Fiber, Nappa Fiber, Nappa Fiber Pro, Nappa Clear), ghế điện, sàn ROMAN 360, thảm ROMAN và trần sao, niêm yết giá theo từng dòng xe.",
   "heroEyebrow": "CƠ SỞ TẠI HÀ NỘI & TP. HỒ CHÍ MINH",
   "heroTitle": "Mỗi Khoang Lái Là Một Tác Phẩm Độc Bản",
-  "heroBody": "**ROMAN (Công Roman Car Interior)** chuyên bọc ghế da, ghế điện, thảm sàn 360, và trần sao cho mọi dòng xe.\n\nPhương châm: **Làm thật – Nói thật – bảo hành thật. Xe đẹp hơn, ví vẫn phải hợp lý.**\n\nNhận tư vấn cá nhân hóa và hợp tác đại lý trên toàn quốc.\n\nCơ sở 1 tại {store} và Cơ sở 2 tại {warehouse}. Bạn có thể đến xem mẫu da, chọn màu trực tiếp hoặc gọi hotline [{hotline}](tel:{hotlineTel}) để được tư vấn trước.",
+  "heroBody": "**ROMAN** chuyên bọc ghế da, ghế điện, thảm sàn 360, và trần sao cho mọi dòng xe.\n\nPhương châm: **Làm thật – Nói thật – bảo hành thật.**\n\nNhận tư vấn cá nhân hóa và hợp tác đại lý trên toàn quốc.\n\nCơ sở Hà Nội tại {store} và Cơ sở TP. HCM tại {warehouse}. Bạn có thể đến xem mẫu da, chọn màu trực tiếp hoặc gọi hotline [{hotline}](tel:{hotlineTel}) để được tư vấn trước.",
   "heroImage": "xuong-01",
   "stats": [
    {
@@ -2036,7 +2036,7 @@ const PAGES = {
    ],
    "sideEyebrow": "GẶP TRỰC TIẾP TẠI ROMAN",
    "sideTitle": "Hệ Thống Cơ Sở ROMAN",
-   "sideBody": "**Công Roman Car Interior**\n\n- Chuyên thảm sàn & ghế da ô tô Roman\n- Làm thật – Nói thật – bảo hành thật\n- Xe đẹp hơn, ví vẫn phải hợp lý 😄\n\n📩 Nhận tư vấn & hợp tác đại lý toàn quốc.\nHotline / Zalo: [{hotline}](tel:{hotlineTel})."
+   "sideBody": "Ghé trực tiếp các cơ sở để xem mẫu da và chọn màu thực tế:\n\n- **Cơ sở Hà Nội**: {store}\n- **Cơ sở TP. HCM**: {warehouse}\n\nNhận tư vấn cá nhân hóa và hợp tác đại lý trên toàn quốc.\nHotline / Zalo: [{hotline}](tel:{hotlineTel})."
   }
  },
  "policy": {
@@ -2053,12 +2053,12 @@ const PAGES = {
    {
     "id": "bao-mat",
     "title": "Chính sách bảo mật thông tin",
-    "body": "### Thông tin chúng tôi thu thập\n\nKhi bạn gửi biểu mẫu đặt lịch, ROMAN nhận các thông tin do chính bạn cung cấp: họ tên, số điện thoại, hãng và dòng xe, ngày dự kiến thi công, hạng mục quan tâm và ghi chú.\n\n### Mục đích sử dụng\n\n- Liên hệ tư vấn, báo giá và xác nhận lịch hẹn.\n- Thực hiện và bảo hành dịch vụ bạn đã đặt.\n\n### Chia sẻ và lưu trữ\n\nROMAN không bán hoặc cho thuê thông tin cá nhân của khách hàng. Thông tin chỉ được chia sẻ khi có yêu cầu của cơ quan nhà nước có thẩm quyền theo quy định của pháp luật.\n\n### Quyền của bạn\n\nBạn có thể yêu cầu xem, chỉnh sửa hoặc xóa thông tin đã cung cấp bằng cách liên hệ [{email}](mailto:{email}) hoặc gọi hotline.\n\n### Dịch vụ bên thứ ba\n\nWebsite tải phông chữ từ Google Fonts, vì vậy trình duyệt của bạn có thể gửi địa chỉ IP tới Google khi mở trang. Khi bạn bấm vào liên kết dẫn tới trang khác (ví dụ Google Maps), chính sách của trang đó sẽ được áp dụng."
+    "body": "### Thông tin chúng tôi thu thập\n\nKhi bạn gửi biểu mẫu đặt lịch, ROMAN nhận các thông tin do chính bạn cung cấp: họ tên, số điện thoại, hãng và dòng xe, ngày dự kiến thi công, hạng mục quan tâm và ghi chú.\n\n### Mục đích sử dụng\n\n- Liên hệ tư vấn, báo giá và xác nhận lịch hẹn.\n- Thực hiện và bảo hành dịch vụ bạn đã đặt.\n\n### Chia sẻ và lưu trữ\n\nROMAN không bán hoặc cho thuê thông tin cá nhân của khách hàng. Thông tin chỉ được chia sẻ khi có yêu cầu của cơ quan nhà nước có thẩm quyền theo quy định của pháp luật.\n\n### Quyền của bạn\n\nBạn có thể yêu cầu xem, chỉnh sửa hoặc xóa thông tin đã cung cấp bằng cách liên hệ hotline [{hotline}](tel:{hotlineTel}) hoặc Zalo của ROMAN.\n\n### Dịch vụ bên thứ ba\n\nWebsite tải phông chữ từ Google Fonts, vì vậy trình duyệt của bạn có thể gửi địa chỉ IP tới Google khi mở trang. Khi bạn bấm vào liên kết dẫn tới trang khác (ví dụ Google Maps), chính sách của trang đó sẽ được áp dụng."
    },
    {
     "id": "dieu-khoan",
     "title": "Điều khoản sử dụng website",
-    "body": "- **Mục đích:** website giới thiệu sản phẩm, dịch vụ và bảng giá của ROMAN. Website không phải kênh thanh toán trực tuyến.\n- **Giá niêm yết:** giá hiển thị là giá niêm yết theo bảng giá của ROMAN, có thể thay đổi theo dòng xe, cấu hình và thời điểm. Giá chính xác được xác nhận khi liên hệ.\n- **Hình ảnh và mô tả:** mang tính minh họa, màu sắc thực tế có thể chênh lệch tùy màn hình và chất liệu.\n- **Quyền sở hữu nội dung:** nội dung, hình ảnh và thương hiệu trên website thuộc ROMAN hoặc bên cấp phép. Không sao chép, sử dụng cho mục đích thương mại khi chưa được đồng ý bằng văn bản.\n- **Thay đổi:** ROMAN có thể cập nhật nội dung website và các điều khoản này mà không cần báo trước.\n\nMọi thắc mắc xin liên hệ hotline [{hotline}](tel:{hotlineTel})  hoặc email [{email}](mailto:{email})."
+    "body": "- **Mục đích:** website giới thiệu sản phẩm, dịch vụ và bảng giá của ROMAN. Website không phải kênh thanh toán trực tuyến.\n- **Giá niêm yết:** giá hiển thị là giá niêm yết theo bảng giá của ROMAN, có thể thay đổi theo dòng xe, cấu hình và thời điểm. Giá chính xác được xác nhận khi liên hệ.\n- **Hình ảnh và mô tả:** mang tính minh họa, màu sắc thực tế có thể chênh lệch tùy màn hình và chất liệu.\n- **Quyền sở hữu nội dung:** nội dung, hình ảnh và thương hiệu trên website thuộc ROMAN hoặc bên cấp phép. Không sao chép, sử dụng cho mục đích thương mại khi chưa được đồng ý bằng văn bản.\n- **Thay đổi:** ROMAN có thể cập nhật nội dung website và các điều khoản này mà không cần báo trước.\n\nMọi thắc mắc xin liên hệ hotline [{hotline}](tel:{hotlineTel}) hoặc Zalo của ROMAN."
    }
   ]
  }

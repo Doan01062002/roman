@@ -212,7 +212,7 @@ function renderFooter() {
       `<a href="tel:${tel}">Hotline: ${esc(SITE.hotline)}</a>`,
       ...(SITE.hotline2 ? [`<a href="tel:${esc(SITE.hotline2.replace(/\s/g, ""))}">Hotline 2: ${esc(SITE.hotline2)}</a>`] : []),
       ...((SOCIAL.find(s => s.name === "Zalo")?.url) ? [`<a href="${esc(SOCIAL.find(s => s.name === "Zalo").url)}" target="_blank" rel="noopener">Zalo: ${esc(SITE.hotline)}</a>`] : []),
-      `<a href="mailto:${esc(SITE.email)}">Email hỗ trợ${ext}</a>`
+      ...(SITE.email ? [`<a href="mailto:${esc(SITE.email)}">Email hỗ trợ${ext}</a>`] : [])
     ]],
     ["Giới Thiệu", ['<a href="about.html">Câu chuyện thương hiệu</a>', '<a href="about.html#quy-trinh">Quy trình chế tác</a>', '<a href="about.html#cua-hang">Hệ thống cơ sở</a>', ...(PAGES.about.jobs.items.length ? ['<a href="about.html#tuyen-dung">Tuyển dụng</a>'] : [])]],
   ];
@@ -928,7 +928,7 @@ function initAbout() {
   ${A.jobs.items.length ? `<section class="block" id="tuyen-dung">${secHead(A.jobs)}
     <div class="support-grid">${A.jobs.items.map(j => `<article class="support-card">
         <div><h3 class="card-h">${esc(fill(j.title))}</h3>${md(j.body)}</div>
-        <a class="btn btn-line btn-sm" href="mailto:${esc(SITE.email)}?subject=${encodeURIComponent("Ứng tuyển " + fill(j.title))}">Ứng tuyển qua Email</a>
+        ${SITE.email ? `<a class="btn btn-line btn-sm" href="mailto:${esc(SITE.email)}?subject=${encodeURIComponent("Ứng tuyển " + fill(j.title))}">Ứng tuyển qua Email</a>` : `<a class="btn btn-line btn-sm" href="tel:${esc(SITE.hotline.replace(/\s/g, ""))}">Ứng tuyển qua Hotline / Zalo</a>`}
       </article>`).join("")}</div>
   </section>` : ""}`;
   jumpToHash();
@@ -1019,7 +1019,7 @@ function initSupport() {
     const f = e.target, d = Object.fromEntries(new FormData(f)), out = $("#sent");
     const callUs = `Cần gấp, hãy gọi ${hotlineLinks()}.`;
     const lines = [`Họ tên: ${d.name}`, `Điện thoại: ${d.phone}`, d.car && `Xe: ${d.car}`, d.date && `Ngày dự kiến thi công: ${d.date}`, `Hạng mục: ${d.topic}`, d.msg && `Ghi chú: ${d.msg}`].filter(Boolean);
-    const mailto = `mailto:${SITE.email}?subject=${encodeURIComponent(`Đặt lịch tư vấn - ${d.name} - ${d.phone}`)}&body=${encodeURIComponent(lines.join("\n"))}`;
+    const mailto = SITE.email ? `mailto:${SITE.email}?subject=${encodeURIComponent(`Đặt lịch tư vấn - ${d.name} - ${d.phone}`)}&body=${encodeURIComponent(lines.join("\n"))}` : "";
     if (SITE.formEndpoint) {
       const btn = f.querySelector("button[type=submit]");
       btn.disabled = true;
@@ -1030,13 +1030,14 @@ function initSupport() {
         out.innerHTML = `✓ ROMAN đã nhận yêu cầu của bạn và sẽ liên hệ lại qua số điện thoại đã để lại. ${callUs}`;
       } catch (err) {
         /* Không có máy chủ nhận form (ví dụ đang chạy trên hosting tĩnh): cho khách gửi qua email */
-        out.innerHTML = `Chưa gửi được qua website. Bạn có thể <a href="${esc(mailto)}" style="text-decoration:underline">gửi yêu cầu bằng email</a> với nội dung đã điền sẵn. ${callUs}`;
+        out.innerHTML = SITE.email ? `Chưa gửi được qua website. Bạn có thể <a href="${esc(mailto)}" style="text-decoration:underline">gửi yêu cầu bằng email</a> với nội dung đã điền sẵn. ${callUs}` : `Chưa gửi được qua website. ${callUs}`;
       }
       btn.disabled = false;
       return;
     }
-    location.href = mailto;
-    out.innerHTML = `Ứng dụng email của bạn đang mở với nội dung đã điền sẵn gửi tới ${esc(SITE.email)}, bạn chỉ cần bấm Gửi. ${callUs}`;
+    if (SITE.email) { location.href = mailto; out.innerHTML = `Ứng dụng email của bạn đang mở với nội dung đã điền sẵn gửi tới ${esc(SITE.email)}, bạn chỉ cần bấm Gửi. ${callUs}`; } else { out.innerHTML = `Đã nhận thông tin. ${callUs}`; }
+
+
   });
   jumpToHash();
 }

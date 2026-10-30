@@ -185,7 +185,7 @@ $show_admin_bar = is_user_logged_in();
     'image'       => '/assets/photos/xuong-01-xl.jpg',
     'logo'        => '/assets/logo-emblem.png',
     'telephone'   => $site['hotline'] ?? '0964 486 246',
-    'email'       => $site['email'] ?? '',
+
     'address'     => [
         '@type'           => 'PostalAddress',
         'streetAddress'   => '170 Sài Đồng',
@@ -408,7 +408,7 @@ $show_admin_bar = is_user_logged_in();
 <div id="footer"></div>
 <script src="/js/data.js?v=d<?php echo esc_attr($rev); ?>"></script>
 <script src="/js/art.js?v=29"></script>
-<script src="/js/app.js?v=56"></script>
+<script src="/js/app.js?v=57"></script>
 <?php if ($page_type === 'home'): ?>
 <script src="/js/finder.js?v=4"></script>
 <?php endif; ?>
