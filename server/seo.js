@@ -66,7 +66,7 @@ function slotsFor(X, file) {
     return { pageSupport: `<div class="page-head"><p class="sec-eyebrow">${esc(fill(S.eyebrow))}</p><h1>${esc(fill(S.title))}</h1><p class="cat-lead">${esc(fill(S.lead))}</p></div>
 <div class="support-grid">${S.cards.map(x => `<div class="support-card"><h2 class="card-h">${esc(fill(x.title))}</h2>${md(x.body)}</div>`).join("")}</div>
 <section class="block faq" id="faq"><h2 class="section-title">${esc(fill(S.faq.title))}</h2>${S.faq.items.map(f => `<details><summary>${esc(fill(f.q))}</summary>${md(f.a)}</details>`).join("")}</section>
-<section class="block" id="lien-he"><h2 class="section-title">${esc(fill(B.title))}</h2><p class="section-sub">${esc(fill(B.sub))}</p><ul class="booking-perks"><li>Cửa hàng: ${esc(site.store)}</li><li>Tổng kho: ${esc(site.warehouse)}</li>${site.hours ? `<li>Giờ mở cửa: ${esc(site.hours)}</li>` : ""}<li>Hotline: <a href="tel:${telOf(site.hotline)}">${esc(site.hotline)}</a>${site.hotline2 ? ` – <a href="tel:${telOf(site.hotline2)}">${esc(site.hotline2)}</a>` : ""}</li>${site.email ? `<li>Email: <a href="mailto:${esc(site.email)}">${esc(site.email)}</a></li>` : ""}</ul></section>` };
+<section class="block" id="lien-he"><h2 class="section-title">${esc(fill(B.title))}</h2><p class="section-sub">${esc(fill(B.sub))}</p><ul class="booking-perks"><li>Cơ sở Hà Nội: ${esc(site.store)}</li><li>Cơ sở TP. HCM: ${esc(site.warehouse)}</li>${site.hours ? `<li>Giờ mở cửa: ${esc(site.hours)}</li>` : ""}<li>Hotline: <a href="tel:${telOf(site.hotline)}">${esc(site.hotline)}</a>${site.hotline2 ? ` – <a href="tel:${telOf(site.hotline2)}">${esc(site.hotline2)}</a>` : ""}</li>${site.email ? `<li>Email: <a href="mailto:${esc(site.email)}">${esc(site.email)}</a></li>` : ""}</ul></section>` };
   }
   if (file === "about.html") {
     const A = c.pages.about;
@@ -113,7 +113,7 @@ function businessLd(X) {
     "@context": "https://schema.org", "@type": "AutoRepair", "@id": X.abs("#cua-hang"),
     name: site.name, description: site.tagline, url: X.abs(""), image: X.abs(photo("xuong-01", "xl")), logo: X.abs("assets/logo-emblem.png"),
     telephone: site.hotline, email: site.email, address: addressLd(site), priceRange: "₫₫",
-    areaServed: { "@type": "City", name: "Hà Nội" },
+    areaServed: [{ "@type": "City", name: "Hà Nội" }, { "@type": "City", name: "TP. Hồ Chí Minh" }],
     contactPoint: [site.hotline, site.hotline2].filter(Boolean).map(t => ({ "@type": "ContactPoint", telephone: t, contactType: "customer service", availableLanguage: "vi" })),
   };
   if (site.legalName) o.legalName = site.legalName;

@@ -1227,11 +1227,11 @@ function roman_render_settings_page() {
                         <td><input type="email" name="site[email]" value="<?php echo esc_attr($site['email'] ?? ''); ?>" class="regular-text"></td>
                     </tr>
                     <tr>
-                        <th>Địa chỉ Cửa hàng (Showroom)</th>
+                        <th>Địa chỉ Cơ sở Hà Nội</th>
                         <td><input type="text" name="site[store]" value="<?php echo esc_attr($site['store'] ?? ''); ?>" class="large-text"></td>
                     </tr>
                     <tr>
-                        <th>Địa chỉ Tổng kho</th>
+                        <th>Địa chỉ Cơ sở TP. Hồ Chí Minh</th>
                         <td><input type="text" name="site[warehouse]" value="<?php echo esc_attr($site['warehouse'] ?? ''); ?>" class="large-text"></td>
                     </tr>
                     <tr>

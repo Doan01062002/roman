@@ -1145,7 +1145,7 @@ VIEWS.pages = (v, [tab = "about"]) => {
       section("Khối giới thiệu", null, h("div", { class: "grid2" }, tf(A, "heroEyebrow", "Dòng chữ nhỏ"), tf(A, "heroTitle", "Tiêu đề")), tf(A, "heroBody", "Nội dung", { rows: 6 }), photoField(A, "heroImage", "Ảnh bên cạnh")),
       section("Dải số liệu", "Chỉ nên đưa số liệu có thật", listEd(A.stats, { title: x => `${x.value} · ${x.label}`, addLabel: "Thêm số liệu", max: 6, add: () => ({ value: "", label: "" }), item: x => h("div", { class: "grid2" }, tf(x, "value", "Số / chữ lớn"), tf(x, "label", "Mô tả")) })),
       section("Quy trình", null, secHead(A.process), listEd(A.process.steps, { title: (x, i) => `Bước ${i + 1} · ${x.title}`, addLabel: "Thêm bước", add: () => ({ title: "", body: "" }), item: x => [tf(x, "title", "Tên bước"), tf(x, "body", "Nội dung", { rows: 3 })] })),
-      section("Cửa hàng & tổng kho", "Địa chỉ, hotline và giờ mở cửa lấy từ mục Thông tin cửa hàng", secHead(A.stores), h("div", { class: "grid2" }, tf(A.stores, "storeName", "Tên thẻ cửa hàng"), tf(A.stores, "warehouseName", "Tên thẻ tổng kho"))),
+      section("Hệ thống cơ sở", "Địa chỉ, hotline và giờ mở cửa lấy từ mục Thông tin cửa hàng", secHead(A.stores), h("div", { class: "grid2" }, tf(A.stores, "storeName", "Tên cơ sở Hà Nội"), tf(A.stores, "warehouseName", "Tên cơ sở TP. HCM"))),
       section("Tuyển dụng", "Xóa hết vị trí thì mục Tuyển dụng tự ẩn", secHead(A.jobs), listEd(A.jobs.items, { title: x => x.title || "(chưa có tên)", addLabel: "Thêm vị trí", add: () => ({ title: "", body: "" }), item: x => [tf(x, "title", "Vị trí"), tf(x, "body", "Mô tả", { rows: 3 })] })));
   }
   if (tab === "support") {
@@ -1238,7 +1238,7 @@ VIEWS.site = v => {
     section("Thương hiệu", null, h("div", { class: "grid2" }, tf(s, "name", "Tên thương hiệu"), tf(s, "tagline", "Khẩu hiệu")),
       tf(s, "siteUrl", "Địa chỉ website (tên miền)", { type: "url", mono: true, ph: "https://romanauto.vn", hint: "Dùng cho Google: sitemap, đường dẫn chuẩn, ảnh khi chia sẻ link. Để trống khi chưa có tên miền (máy chủ tự dùng tên miền đang truy cập)." })),
     section("Liên hệ", "Dùng ở thanh menu, chân trang, trang Hỗ trợ, Giới thiệu và Chính sách", h("div", { class: "grid3" }, tf(s, "hotline", "Hotline chính", { type: "tel" }), tf(s, "hotline2", "Hotline phụ", { type: "tel" }), tf(s, "email", "Email", { type: "email" })),
-      h("div", { class: "grid2" }, tf(s, "store", "Địa chỉ cửa hàng"), tf(s, "warehouse", "Địa chỉ tổng kho")),
+      h("div", { class: "grid2" }, tf(s, "store", "Địa chỉ cơ sở Hà Nội"), tf(s, "warehouse", "Địa chỉ cơ sở TP. HCM")),
       tf(s, "hours", "Giờ mở cửa", { ph: "VD: 8:00 – 18:00, Thứ 2 – Chủ nhật", hint: "Để trống thì không hiển thị" })),
     section("Thông tin pháp lý", "Hiển thị ở chân trang khi có", h("div", { class: "grid2" }, tf(s, "legalName", "Tên công ty / hộ kinh doanh", { ph: "VD: Công ty TNHH ..." }), tf(s, "taxCode", "Mã số thuế"))),
     section("Mạng xã hội", "Chỉ hiện ở chân trang những mục có liên kết", S.c.social.map(x => tf(x, "url", x.name, { type: "url", ph: x.name === "Zalo" ? "https://zalo.me/0964486246" : `https://www.${x.name.toLowerCase()}.com/...` }))),

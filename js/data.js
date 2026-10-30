@@ -1,5 +1,5 @@
 /* TỆP TỰ SINH từ content/site.json bởi trang quản trị (/admin). Đừng sửa tay: mọi thay đổi sẽ bị ghi đè khi lưu.
-   Phiên bản nội dung: 16 */
+   Phiên bản nội dung: 17 */
 const SITE = {
  "name": "ROMAN",
  "tagline": "Xưởng Chế Tác & Cá Nhân Hóa Nội Thất Ô Tô Cao Cấp",
@@ -8,13 +8,13 @@ const SITE = {
  "hotline": "0964 486 246",
  "hotline2": "",
  "email": "Vinaleather102@gmail.com",
- "store": "763 Nguyễn Văn Linh, Long Biên, Hà Nội",
- "warehouse": "Số 40 Vũ Xuân Thiều, Long Biên, Hà Nội",
+ "store": "170 Sài Đồng, Long Biên, Hà Nội",
+ "warehouse": "40 Tô Nguyệt Đình, Tân Thành, TP. Hồ Chí Minh",
  "formEndpoint": "/api/bookings",
  "hours": "",
  "legalName": "",
  "taxCode": "",
- "address": "763 Nguyễn Văn Linh, Long Biên, Hà Nội"
+ "address": "170 Sài Đồng, Long Biên, Hà Nội"
 };
 const CATEGORIES = [
  {
@@ -1887,9 +1887,9 @@ const PAGES = {
   "eyebrow": "VỀ ROMAN",
   "title": "Nghệ Thuật Chế Tác Nội Thất Ô Tô Thủ Công",
   "lead": "Ghế da ROMAN (Sumi Fiber, Nappa Fiber, Nappa Fiber Pro, Nappa Clear), ghế điện, sàn ROMAN 360, thảm ROMAN và trần sao, niêm yết giá theo từng dòng xe.",
-  "heroEyebrow": "CỬA HÀNG & TỔNG KHO TẠI HÀ NỘI",
+  "heroEyebrow": "CƠ SỞ TẠI HÀ NỘI & TP. HỒ CHÍ MINH",
   "heroTitle": "Mỗi Khoang Lái Là Một Tác Phẩm Độc Bản",
-  "heroBody": "**ROMAN (Công Roman Car Interior)** chuyên bọc ghế da, ghế điện, thảm sàn 360, và trần sao cho mọi dòng xe.\n\nPhương châm: **Làm thật – Nói thật – bảo hành thật. Xe đẹp hơn, ví vẫn phải hợp lý.**\n\nNhận tư vấn cá nhân hóa và hợp tác đại lý trên toàn quốc.\n\nCửa hàng ở {store} và tổng kho ở {warehouse}. Bạn có thể đến xem mẫu da, chọn màu trực tiếp hoặc gọi hotline [{hotline}](tel:{hotlineTel}) để được tư vấn trước.",
+  "heroBody": "**ROMAN (Công Roman Car Interior)** chuyên bọc ghế da, ghế điện, thảm sàn 360, và trần sao cho mọi dòng xe.\n\nPhương châm: **Làm thật – Nói thật – bảo hành thật. Xe đẹp hơn, ví vẫn phải hợp lý.**\n\nNhận tư vấn cá nhân hóa và hợp tác đại lý trên toàn quốc.\n\nCơ sở 1 tại {store} và Cơ sở 2 tại {warehouse}. Bạn có thể đến xem mẫu da, chọn màu trực tiếp hoặc gọi hotline [{hotline}](tel:{hotlineTel}) để được tư vấn trước.",
   "heroImage": "xuong-01",
   "stats": [
    {
@@ -1905,8 +1905,8 @@ const PAGES = {
     "label": "Thảm ROMAN: Signature, Premium, Luxury"
    },
    {
-    "value": "2 địa điểm",
-    "label": "Cửa hàng và tổng kho tại Long Biên, Hà Nội"
+    "value": "2 cơ sở",
+    "label": "Hệ thống cơ sở tại Hà Nội & TP. Hồ Chí Minh"
    }
   ],
   "process": {
@@ -1916,7 +1916,7 @@ const PAGES = {
    "steps": [
     {
      "title": "Tư Vấn & Phối Màu Cá Nhân Hóa",
-     "body": "Xem mẫu da, bảng màu và kiểu may trực tiếp tại cửa hàng, hoặc gọi hotline để được tư vấn theo dòng xe của bạn."
+     "body": "Xem mẫu da, bảng màu và kiểu may trực tiếp tại các cơ sở, hoặc gọi hotline để được tư vấn theo dòng xe của bạn."
     },
     {
      "title": "Quét Khuôn & Cắt Rập CNC",
@@ -1933,16 +1933,18 @@ const PAGES = {
    ]
   },
   "stores": {
-   "eyebrow": "CỬA HÀNG & TỔNG KHO",
+   "eyebrow": "HỆ THỐNG CƠ SỞ",
    "title": "Địa Chỉ ROMAN",
-   "sub": "Ghé cửa hàng để xem mẫu da và chọn màu trực tiếp; liên hệ hotline để được tư vấn trước khi đến.",
-   "storeName": "ROMAN Long Biên, Hà Nội",
-   "warehouseName": "Tổng kho ROMAN"
+   "sub": "Ghé các cơ sở để xem mẫu da và chọn màu trực tiếp; liên hệ hotline để được tư vấn trước khi đến.",
+   "storeLabel": "CƠ SỞ HÀ NỘI",
+   "storeName": "ROMAN Hà Nội",
+   "warehouseLabel": "CƠ SỞ TP. HCM",
+   "warehouseName": "ROMAN TP. Hồ Chí Minh"
   },
   "jobs": {
    "eyebrow": "CƠ HỘI NGHỀ NGHIỆP",
    "title": "Tuyển Dụng Nghệ Nhân & Kỹ Thuật Viên",
-   "sub": "Gia nhập đội ngũ chế tác nội thất ô tô ROMAN tại Hà Nội.",
+   "sub": "Gia nhập đội ngũ chế tác nội thất ô tô ROMAN tại Hà Nội & TP. Hồ Chí Minh.",
    "items": [
     {
      "title": "Nghệ nhân may & bọc ghế da ô tô",
@@ -2009,7 +2011,7 @@ const PAGES = {
     },
     {
      "q": "Tôi có thể xem và chạm thử mẫu da trước khi quyết định không?",
-     "a": "Có. Bạn có thể đến cửa hàng ROMAN tại {store} để xem mẫu da và chọn màu trực tiếp. Nên gọi hotline trước để được chuẩn bị mẫu phù hợp với xe của bạn."
+     "a": "Có. Bạn có thể đến các cơ sở ROMAN tại Hà Nội ({store}) hoặc TP. Hồ Chí Minh ({warehouse}) để xem mẫu da và chọn màu trực tiếp. Nên gọi hotline trước để được chuẩn bị mẫu phù hợp với xe của bạn."
     },
     {
      "q": "Hướng dẫn vệ sinh và dưỡng ghế da Nappa bền đẹp lâu dài?",
@@ -2033,7 +2035,7 @@ const PAGES = {
     "Khác"
    ],
    "sideEyebrow": "GẶP TRỰC TIẾP TẠI ROMAN",
-   "sideTitle": "Cửa Hàng & Tổng Kho ROMAN",
+   "sideTitle": "Hệ Thống Cơ Sở ROMAN",
    "sideBody": "**Công Roman Car Interior**\n\n- Chuyên thảm sàn & ghế da ô tô Roman\n- Làm thật – Nói thật – bảo hành thật\n- Xe đẹp hơn, ví vẫn phải hợp lý 😄\n\n📩 Nhận tư vấn & hợp tác đại lý toàn quốc.\nHotline / Zalo: [{hotline}](tel:{hotlineTel})."
   }
  },
@@ -2046,7 +2048,7 @@ const PAGES = {
    {
     "id": "bao-hanh",
     "title": "Chính sách bảo hành",
-    "body": "Thời hạn và phạm vi bảo hành phụ thuộc vào từng hạng mục (ghế da, ghế điện, sàn, thảm, trần sao...) và chất liệu đã chọn. ROMAN xác nhận cụ thể với khách hàng khi đặt lịch hoặc bàn giao xe.\n\n### Quy trình bảo hành\n\n1. Liên hệ hotline [{hotline}](tel:{hotlineTel})  và cho biết họ tên, số điện thoại, dòng xe, hạng mục đã thực hiện.\n2. Mang xe đến cửa hàng ROMAN tại {store} để nhân viên kiểm tra tình trạng thực tế.\n3. ROMAN thông báo kết quả kiểm tra và hướng xử lý (sửa chữa, thay thế hoặc tư vấn bảo dưỡng) tùy từng trường hợp.\n\n### Các trường hợp thường không thuộc phạm vi bảo hành\n\n- Hư hỏng do va chạm, tai nạn, cháy nổ hoặc thiên tai.\n- Sử dụng sai cách, vệ sinh bằng hóa chất không phù hợp với chất liệu.\n- Tự ý tháo, sửa hoặc can thiệp vào sản phẩm bởi đơn vị khác.\n- Hao mòn tự nhiên theo thời gian và cường độ sử dụng.\n\nĐể biết thời hạn bảo hành chính xác của hạng mục bạn quan tâm, vui lòng liên hệ hotline."
+    "body": "Thời hạn và phạm vi bảo hành phụ thuộc vào từng hạng mục (ghế da, ghế điện, sàn, thảm, trần sao...) và chất liệu đã chọn. ROMAN xác nhận cụ thể với khách hàng khi đặt lịch hoặc bàn giao xe.\n\n### Quy trình bảo hành\n\n1. Liên hệ hotline [{hotline}](tel:{hotlineTel})  và cho biết họ tên, số điện thoại, dòng xe, hạng mục đã thực hiện.\n2. Mang xe đến cửa hàng ROMAN tại Hà Nội ({store}) hoặc TP. HCM ({warehouse}) để nhân viên kiểm tra tình trạng thực tế.\n3. ROMAN thông báo kết quả kiểm tra và hướng xử lý (sửa chữa, thay thế hoặc tư vấn bảo dưỡng) tùy từng trường hợp.\n\n### Các trường hợp thường không thuộc phạm vi bảo hành\n\n- Hư hỏng do va chạm, tai nạn, cháy nổ hoặc thiên tai.\n- Sử dụng sai cách, vệ sinh bằng hóa chất không phù hợp với chất liệu.\n- Tự ý tháo, sửa hoặc can thiệp vào sản phẩm bởi đơn vị khác.\n- Hao mòn tự nhiên theo thời gian và cường độ sử dụng.\n\nĐể biết thời hạn bảo hành chính xác của hạng mục bạn quan tâm, vui lòng liên hệ hotline."
    },
    {
     "id": "bao-mat",

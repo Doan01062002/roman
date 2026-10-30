@@ -83,7 +83,7 @@ if ($req_Trim === '' || $req_Trim === 'index.html' || is_front_page() || is_home
 // Thiết lập tiêu đề, mô tả & canonical theo từng trang
 $site_name = $site['name'] ?? 'ROMAN';
 $title = $site_name . ' | ' . ($site['tagline'] ?? 'Xưởng Chế Tác & Cá Nhân Hóa Nội Thất Ô Tô Cao Cấp');
-$desc = 'ROMAN: ghế da Sumi Fiber, Nappa Fiber, Nappa Fiber Pro, Nappa Clear, ghế điện, sàn ROMAN 360, thảm ROMAN và trần sao. Cửa hàng tại 763 Nguyễn Văn Linh, Long Biên, Hà Nội.';
+$desc = 'ROMAN: ghế da Sumi Fiber, Nappa Fiber, Nappa Fiber Pro, Nappa Clear, ghế điện, sàn ROMAN 360, thảm ROMAN và trần sao. Hệ thống cơ sở tại Hà Nội & TP. Hồ Chí Minh.';
 $canonical = '/';
 $og_img = '/assets/photos/ghe-04-xl.jpg';
 $og_type = 'website';
@@ -188,7 +188,7 @@ $show_admin_bar = is_user_logged_in();
     'email'       => $site['email'] ?? '',
     'address'     => [
         '@type'           => 'PostalAddress',
-        'streetAddress'   => '763 Nguyễn Văn Linh',
+        'streetAddress'   => '170 Sài Đồng',
         'addressLocality' => 'Long Biên',
         'addressRegion'   => 'Hà Nội',
         'addressCountry'  => 'VN',
@@ -408,7 +408,7 @@ $show_admin_bar = is_user_logged_in();
 <div id="footer"></div>
 <script src="/js/data.js?v=d<?php echo esc_attr($rev); ?>"></script>
 <script src="/js/art.js?v=29"></script>
-<script src="/js/app.js?v=55"></script>
+<script src="/js/app.js?v=56"></script>
 <?php if ($page_type === 'home'): ?>
 <script src="/js/finder.js?v=4"></script>
 <?php endif; ?>

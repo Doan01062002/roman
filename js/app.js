@@ -204,7 +204,7 @@ function renderFooter() {
   const cols = [
     ["Sản Phẩm & Dịch Vụ", [...CATEGORIES.map(c => `<a href="category.html?cat=${c.id}">${esc(c.name)}</a>`), `<a href="category.html?cat=ghe-da&sub=${encodeURIComponent("Ghế Limousine")}">Ghế chủ tịch Limousine</a>`]],
     ["Chất Liệu & Hạng Mục", [["Ghế Chủ Tịch Limousine", "limo-hermes"], ["Ghế Limousine Maybach", "limo-maybach"], ["Ghế da Sumi Fiber", "ghe-cong-nghiep"], ["Ghế da Nappa Fiber", "ghe-nappa-6d"], ["Ghế da Nappa Fiber Pro", "ghe-da-bo-y"], ["Ghế da Nappa Clear", "ghe-nappa-clear"], ["Ghế điện", "ghe-dien"], ["Sàn ROMAN 360 Premium", "san-6d"], ["Thảm ROMAN Signature", "tham-san-duc"], ["Trần sao Starlight", "tran-sao"], ["Trần da lộn", "tran-da-lon"]].map(([n, id]) => { const p = PRODUCTS.find(x => x.id === id); return p ? `<a href="${pUrl(p)}">${n}</a>` : ""; }).filter(Boolean)],
-    ["Mua Sắm & Đặt Lịch", ['<a href="category.html">Bảng giá niêm yết</a>', '<a href="support.html#lien-he">Đặt lịch thi công tại xưởng</a>', '<a href="support.html?dv=limo-hermes#lien-he">Đặt chế tác ghế Limousine</a>', '<a href="about.html#cua-hang">Trực tiếp xem mẫu da</a>', '<a href="about.html#cua-hang">Cửa hàng &amp; tổng kho</a>']],
+    ["Mua Sắm & Đặt Lịch", ['<a href="category.html">Bảng giá niêm yết</a>', '<a href="support.html#lien-he">Đặt lịch thi công tại xưởng</a>', '<a href="support.html?dv=limo-hermes#lien-he">Đặt chế tác ghế Limousine</a>', '<a href="about.html#cua-hang">Trực tiếp xem mẫu da</a>', '<a href="about.html#cua-hang">Hệ thống cơ sở</a>']],
     ["Hỗ Trợ", [
       '<a href="support.html">Trung tâm hỗ trợ</a>',
       '<a href="support.html#faq">Câu hỏi thường gặp</a>',
@@ -214,7 +214,7 @@ function renderFooter() {
       ...((SOCIAL.find(s => s.name === "Zalo")?.url) ? [`<a href="${esc(SOCIAL.find(s => s.name === "Zalo").url)}" target="_blank" rel="noopener">Zalo: ${esc(SITE.hotline)}</a>`] : []),
       `<a href="mailto:${esc(SITE.email)}">Email hỗ trợ${ext}</a>`
     ]],
-    ["Giới Thiệu", ['<a href="about.html">Câu chuyện thương hiệu</a>', '<a href="about.html#quy-trinh">Quy trình chế tác</a>', '<a href="about.html#cua-hang">Cửa hàng &amp; tổng kho</a>', ...(PAGES.about.jobs.items.length ? ['<a href="about.html#tuyen-dung">Tuyển dụng</a>'] : [])]],
+    ["Giới Thiệu", ['<a href="about.html">Câu chuyện thương hiệu</a>', '<a href="about.html#quy-trinh">Quy trình chế tác</a>', '<a href="about.html#cua-hang">Hệ thống cơ sở</a>', ...(PAGES.about.jobs.items.length ? ['<a href="about.html#tuyen-dung">Tuyển dụng</a>'] : [])]],
   ];
   const badgeHtml = SITE.badge ? `<img class="foot-badge" src="${esc(SITE.badge)}" alt="${esc(SITE.name)}" width="52" height="52">` : "";
   $("#footer").outerHTML = `<footer class="site-footer">
@@ -224,7 +224,7 @@ function renderFooter() {
     </div></section>
     <div class="foot-in">
     <div class="foot-grid">${cols.map(([t, l]) => `<div class="foot-col"><h2 class="foot-h">${t}</h2><ul>${l.map(x => `<li>${x}</li>`).join("")}</ul></div>`).join("")}</div>
-    <div class="foot-info">${badgeHtml}<p>Bản quyền ©${new Date().getFullYear()} ${esc(SITE.name)} bảo lưu mọi quyền.<br>${SITE.legalName ? `${esc(SITE.legalName)}${SITE.taxCode ? ` · MST: ${esc(SITE.taxCode)}` : ""}<br>` : ""}Cửa hàng: ${esc(SITE.store)}<br>Tổng kho: ${esc(SITE.warehouse)}<br>${SITE.hours ? `Giờ mở cửa: ${esc(SITE.hours)}<br>` : ""}Hotline: <b>${esc(SITE.hotline)}</b>${SITE.hotline2 ? ` – <b>${esc(SITE.hotline2)}</b>` : ""}${SITE.email ? ` · Email: ${esc(SITE.email)}` : ""}</p></div>
+    <div class="foot-info">${badgeHtml}<p>Bản quyền ©${new Date().getFullYear()} ${esc(SITE.name)} bảo lưu mọi quyền.<br>${SITE.legalName ? `${esc(SITE.legalName)}${SITE.taxCode ? ` · MST: ${esc(SITE.taxCode)}` : ""}<br>` : ""}Cơ sở Hà Nội: ${esc(SITE.store)}<br>Cơ sở TP. HCM: ${esc(SITE.warehouse)}<br>${SITE.hours ? `Giờ mở cửa: ${esc(SITE.hours)}<br>` : ""}Hotline: <b>${esc(SITE.hotline)}</b>${SITE.hotline2 ? ` – <b>${esc(SITE.hotline2)}</b>` : ""}${SITE.email ? ` · Email: ${esc(SITE.email)}` : ""}</p></div>
     <div class="foot-bottom"><div class="foot-legal"><b>Việt Nam/Tiếng Việt</b><a href="chinh-sach.html#dieu-khoan">Điều khoản sử dụng</a><a href="chinh-sach.html#bao-mat">Bảo mật</a><a href="so-do-trang.html">Sơ đồ trang</a></div>
       <div class="foot-social"${SOCIAL.some(x => x.url) ? "" : " hidden"}><span>Kết nối với Chúng tôi</span>${SOCIAL.filter(x => x.url).map(x => `<a href="${esc(x.url)}" aria-label="${esc(x.name)}" target="_blank" rel="noopener"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">${SOCIAL_ICONS[x.name] || ""}</svg></a>`).join("")}</div></div>
   </div></footer>
@@ -923,7 +923,7 @@ function initAbout() {
     <div class="process-grid">${A.process.steps.map((x, i) => `<article class="process-card"><span class="process-num">BƯỚC ${String(i + 1).padStart(2, "0")}</span><h3>${esc(fill(x.title))}</h3>${md(x.body)}</article>`).join("")}</div>
   </section>` : ""}
   <section class="block" id="cua-hang">${secHead(A.stores)}
-    <div class="support-grid">${loc("CỬA HÀNG", A.stores.storeName, SITE.store)}${loc("TỔNG KHO", A.stores.warehouseName, SITE.warehouse)}</div>
+    <div class="support-grid">${loc(A.stores.storeLabel || "CƠ SỞ HÀ NỘI", A.stores.storeName, SITE.store)}${loc(A.stores.warehouseLabel || "CƠ SỞ TP. HCM", A.stores.warehouseName, SITE.warehouse)}</div>
   </section>
   ${A.jobs.items.length ? `<section class="block" id="tuyen-dung">${secHead(A.jobs)}
     <div class="support-grid">${A.jobs.items.map(j => `<article class="support-card">
@@ -986,8 +986,8 @@ function initSupport() {
           <h3>${esc(fill(B.sideTitle))}</h3>
           ${md(B.sideBody)}
           <ul class="booking-perks">
-            ${SITE.store ? `<li><span>•</span> <b>Cửa hàng:</b> ${esc(SITE.store)} · <a href="${esc(mapsUrl(SITE.store))}" target="_blank" rel="noopener" style="text-decoration:underline">Chỉ đường</a></li>` : ""}
-            ${SITE.warehouse ? `<li><span>•</span> <b>Tổng kho:</b> ${esc(SITE.warehouse)} · <a href="${esc(mapsUrl(SITE.warehouse))}" target="_blank" rel="noopener" style="text-decoration:underline">Chỉ đường</a></li>` : ""}
+            ${SITE.store ? `<li><span>•</span> <b>Cơ sở Hà Nội:</b> ${esc(SITE.store)} · <a href="${esc(mapsUrl(SITE.store))}" target="_blank" rel="noopener" style="text-decoration:underline">Chỉ đường</a></li>` : ""}
+            ${SITE.warehouse ? `<li><span>•</span> <b>Cơ sở TP. HCM:</b> ${esc(SITE.warehouse)} · <a href="${esc(mapsUrl(SITE.warehouse))}" target="_blank" rel="noopener" style="text-decoration:underline">Chỉ đường</a></li>` : ""}
             ${SITE.hours ? `<li><span>•</span> <b>Giờ mở cửa:</b> ${esc(SITE.hours)}</li>` : ""}
             ${SITE.email ? `<li><span>•</span> <b>Email:</b> <a href="mailto:${esc(SITE.email)}" style="text-decoration:underline">${esc(SITE.email)}</a></li>` : ""}
           </ul>
